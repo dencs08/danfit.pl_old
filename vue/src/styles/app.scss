@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./variables.scss";
+@import "./utilities.scss";
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    background-color: $white;
+
+    color: $black;
+    font-family: $font-family-secondary;
+
+    overflow-x: hidden;
+}
+
+h1 {
+    font-family: $font-family-primary;
+    font-size: clamp(1.3rem, 9vw, 50rem);
+    font-weight: 700;
+}
