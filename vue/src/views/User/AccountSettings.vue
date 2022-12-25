@@ -8,7 +8,7 @@
                     o koncie.</p>
             </div>
 
-            <div class="mt-6 grid grid-cols-12 gap-6">
+            <div class="mt-6 mb-2 grid grid-cols-12 gap-6">
                 <InputCustom name="first-name" type="input" label="Imie" class="col-span-12 sm:col-span-6" />
 
                 <InputCustom name="surname" type="input" label="Nazwisko" class="col-span-12 sm:col-span-6" />
@@ -16,12 +16,16 @@
                 <InputCustom name="Email" type="email" label="Email" class="col-span-12 sm:col-span-6" />
 
                 <InputCustom name="Telefon" type="phone" label="Telefon" class="col-span-12 sm:col-span-6" />
+
+            </div>
+            <div class="mt-4 flex justify-end pb-4">
+                <Button class="btn-xs">Zapisz</Button>
             </div>
         </div>
 
         <!-- Password -->
         <div class="divide-t divide-gray-200 pt-1">
-            <div class="py-6 lg:pb-1">
+            <div class="pt-6">
                 <h2 class="text-lg font-medium leading-6 text-gray-900 mb-6">Zmień hasło</h2>
 
                 <div class="grid grid-cols-12 gap-6">
@@ -32,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="mt-4 flex justify-end py-4">
+            <div class="mt-4 flex justify-end pb-4">
                 <Button class="btn-xs">Zapisz</Button>
             </div>
         </div>
