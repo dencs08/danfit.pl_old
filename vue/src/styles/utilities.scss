@@ -1,3 +1,37 @@
+@import "./variables.scss";
+
 .container {
     max-width: 90%;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-mt {
+    margin-top: clamp(3.5rem, 10vw, 10rem);
+}
+
+.section-mb {
+    margin-bottom: clamp(3.5rem, 10vw, 10rem);
+}
+
+.section-pt {
+    padding-top: clamp(3.5rem, 10vw, 10rem);
+}
+
+.section-pb {
+    padding-bottom: clamp(3.5rem, 10vw, 10rem);
+}
+
+//typo
+.font-color-primary {
+    color: $black;
+}
+
+.font-color-secondary {
+    color: lighten($black, 12.5%);
+}
+
+.text-tertiary {
+    color: lighten($black, 15%);
 }
