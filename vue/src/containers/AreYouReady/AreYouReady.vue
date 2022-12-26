@@ -8,12 +8,14 @@
                     </h3>
                     <p class="text-gray-700">
                         Zapraszamy do rezerwacji treningu przez nasz system rezerwacji dostępny
-                        <Link>tutaj</Link>, do zobaczenia niedługo na kortach! :-)
+                        <Link link="Calendar">tutaj</Link>, do zobaczenia niedługo na kortach! :-)
                     </p>
                 </div>
                 <div class="flex items-center space-x-6">
-                    <Button>Zarezerwuj trening</Button>
-                    <Link class="hidden xs:block">Napisz do nas</Link>
+                    <router-link :to="{ name: 'Calendar' }">
+                        <Button>Zarezerwuj trening</Button>
+                    </router-link>
+                    <Link class="hidden xs:block" link="Contact">Napisz do nas</Link>
                 </div>
             </div>
             <div class="flex justify-center lg:justify-end h-full overflow-hidden xl:w-5/6 pointer-events-none">
