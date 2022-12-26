@@ -1,8 +1,25 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import { DefaultLayout, AdminLayout } from "../Layouts";
+import { DefaultLayout, AdminLayout, AccountLayout } from "../Layouts";
 
-import { Start, Dashboard, Login, Register, Overview, Clients } from "../views";
+import {
+    Start,
+    Dashboard,
+    Login,
+    Register,
+    Overview,
+    Clients,
+    Contact,
+    Error404,
+    Privacy,
+    Terms,
+    AccountSettings,
+    MyTrainings,
+    MyEvents,
+    Calendar,
+    Booking,
+    CoachTrainings,
+} from "../views";
 
 const routes = [
     {
@@ -16,9 +33,68 @@ const routes = [
                 component: Login,
             },
             {
-                path: "/register",
+                path: "/rejestracja",
                 name: "Register",
                 component: Register,
+            },
+            {
+                path: "/kontact",
+                name: "Contact",
+                component: Contact,
+            },
+            {
+                path: "/polityka-prywatnosci",
+                name: "Privacy",
+                component: Privacy,
+            },
+            {
+                path: "/warunki-korzystania",
+                name: "Terms",
+                component: Terms,
+            },
+            {
+                path: "/:pathMatch(.*)*",
+                name: "NotFound",
+                component: Error404,
+            },
+            {
+                path: "/kalendarz",
+                name: "Calendar",
+                component: Calendar,
+            },
+        ],
+    },
+
+    {
+        component: AccountLayout,
+        path: "/konto",
+        redirect: "/konto/ustawienia",
+        children: [
+            {
+                path: "/konto/ustawienia",
+                name: "AccountSettings",
+                component: AccountSettings,
+            },
+            {
+                path: "/konto/treningi",
+                name: "MyTrainings",
+                component: MyTrainings,
+            },
+            {
+                path: "/konto/wydarzenia",
+                name: "MyEvents",
+                component: MyEvents,
+            },
+            {
+                path: "/konto/rezerwacje",
+                name: "UserBooking",
+                component: Booking,
+            },
+
+            {
+                path: "/konto/rezerwacje",
+                name: "CoachTrainings",
+                component: CoachTrainings,
             },
         ],
     },
