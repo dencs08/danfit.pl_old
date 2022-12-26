@@ -19,7 +19,7 @@
                         <button type="button" @click="toggleBanner"
                             class="-mr-1 flex rounded-md p-2 hover:bg-gray-700 duration-75 transition-all focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2">
                             <span class="sr-only">Dismiss</span>
-                            <Icon icon="fe:close" class="text-primaryWhite" />
+                            <Icon icon="carbon:checkmark" class="text-primaryWhite" />
                         </button>
                     </div>
                 </div>
