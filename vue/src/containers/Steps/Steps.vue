@@ -21,7 +21,7 @@
                         </p>
                     </div>
                 </div>
-                <router-link to="#">
+                <router-link :to="{ name: 'Calendar' }">
                     <Button class="w-full xs:w-auto">Kalendarz zajeć</Button>
                 </router-link>
             </div>
@@ -44,13 +44,13 @@ export default {
         return {
             steps: [
                 {
-                    title: 'Wybierz zajęcia i poziom',
-                    subtitle: 'Wybierz typ zajęć jaki Cię interesuje, zajęcia grupowe, indywidualne lub w parach i podaj swój poziom gry.',
+                    title: 'Wybierz datę',
+                    subtitle: 'Wybierz wolną datę treningu z naszego kalendarza dostępnego na stronie.',
                     last: false,
                 },
                 {
-                    title: 'Wybierz datę',
-                    subtitle: 'Wybierz wolną datę treningu z naszego kalendarza dostępnego na stronie po założeniu konta.',
+                    title: 'Wybierz zajęcia i poziom',
+                    subtitle: 'Wybierz typ zajęć jaki Cię interesuje i podaj swój poziom gry.',
                     last: false,
                 },
                 {
