@@ -1,12 +1,15 @@
 <template>
+  <Banner class="z-[9999]"></Banner>
   <router-view></router-view>
 </template>
 
 <script  lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-
-})
+import { Banner } from './components'
+export default {
+  components: {
+    Banner
+  }
+}
 </script>
 
 <style lang="scss">
