@@ -1,10 +1,14 @@
 <template>
+    <Modal ref="modal" :title="title" :hourContent="(hourContent as Object)" :coachContent="(coachContent as Object)" />
 
-    <div class="h-10 space-x-4 flex justify-end items-center">
-        <Button class="btn-xs hidden sm:block mb-4">Wyświetl moje treningi</Button>
+    <div v-if="showMyTraining" class="h-10 space-x-4 flex justify-end items-center">
+        <router-link :to="{ name: 'MyTrainings' }">
+            <Button class="btn-xs hidden sm:block mb-4">Wyświetl moje treningi</Button>
+        </router-link>
     </div>
 
     <div class="lg:flex lg:h-full lg:flex-col">
+        <!-- Calendar Header -->
         <header class="flex items-center justify-between border-b border-gray-200 xl:flex-none mb-0">
             <div class="relative sm:flex justify-center items-end sm:space-x-3 mb-3">
                 <div class="flex-row">
@@ -19,15 +23,13 @@
                         <Transition name="fade" mode="out-in">
                             <div v-if="dayCalendarShow"
                                 class="absolute top-[120%] left-[50%] translate-x-[-50%] opacity-1 block z-[99] min-w-[100%] sm:min-w-[350px] 2xl:w-[20vw]">
-                                <div
-                                    class="p-2 bg-white border-1 border-primaryBlack rounded-2xl border border-gray-300 shadow-xl">
+                                <div class="p-2 bg-white border-1 rounded-2xl border border-gray-300 shadow-xl">
                                     <MonthCalendar />
                                 </div>
                             </div>
                         </Transition>
                     </div>
                 </div>
-
 
                 <div>
                     <select id="location" name="location"
@@ -56,7 +58,7 @@
             </div>
         </header>
 
-        <!-- Calendar -->
+        <!-- Calendar info top row -->
         <div class="overflow-x-auto min-h-full px-[2px]">
             <div
                 class="shadow mb-1 ring-1 ring-black ring-opacity-5 xl:flex xl:flex-auto xl:flex-col w-[250vw] sm:w-[150vw]  lg:w-auto">
@@ -80,22 +82,18 @@
                 </div>
 
                 <!-- Desktop -->
-                <div v-for="coach in coaches" :key="coach.name"
-                    class="hidden w-full min-h-[10vh] xl:grid xl:grid-cols-calendar">
+                <div v-if="!isMobile()" v-for="coach in coaches" :key="coach.name"
+                    class="w-full min-h-[10vh] grid grid-cols-calendar">
+
+                    <!-- Coach name -->
                     <div class="text-gray-700 text-sm grid place-content-center text-center">
                         <p class="-rotate-90">{{ coach.name }}</p>
                     </div>
-                    <div v-for="hour in coach.hours" :key="hour.index" class="" :class="[
-                        (hour.isBooked && !hour.lookingFor) ? 'bg-red-500 cursor-default hover:bg-red-500' : 'bg-gray-50 text-gray-800 cursor-pointer',
-                        hour.isClosed ? 'bg-gray-400 hover:bg-gray-400 cursor-default' : '',
-                        hour.myBooked ? 'bg-emerald-600 hover:bg-emerald-700 cursor-pointer' : '',
-                        (!hour.isClosed && hour.isBooked && hour.lookingFor || !hour.isBooked && !hour.myBooked && !hour.isClosed) ? 'hover:bg-gray-200' : '',
-                        'relative py-1 px-2 border-[1px] border-gray-200 border-opacity-50',
-                    ]">
-                        <!-- <time :datetime="hour.date"
-                                class="flex h-6 w-6 items-center justify-center rounded-full font-semibold text-gray-800">
-                                {{ hour.date }}
-                            </time> -->
+
+                    <!-- Coach Hours -->
+                    <div v-for="hour in coach.hours" :key="hour.id" @click="openModal(hour, 'message', coach)"
+                        class="relative py-1 px-2 border-[1px] border-gray-200 border-opacity-50"
+                        :ref="`field${hour.id}`">
                         <div v-if="hour.people.length > 0 && hour.lookingFor"
                             class="flex justify-between text-xs h-[75%]" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="Ci gracze szukają kogoś do gry, zapisz się!">
@@ -118,14 +116,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div v-if="hour.myBooked"
-                            class="grid place-content-center text-center font-medium h-[75%] text-white">
-                            <Icon icon="material-symbols:check-circle" width="15px" class="mx-auto mb-1" />
+                        <div v-if="hour.myBooked" class="text-left font-medium h-[75%] text-white flex">
                             <p class="text-xs">Jesteś zapisany!</p>
+                            <Icon icon="material-symbols:check-circle" width="15px" class="mb-1 min-w-[10px]" />
                         </div>
                         <div v-if="hour.location && hour.myBooked || hour.location && hour.lookingFor"
                             class="h-[25%] text-xs"
-                            :class="[hour.myBooked ? 'text-white text-center' : 'flex justify-end items-end']">
+                            :class="[hour.myBooked ? 'text-white text-right' : 'flex justify-end items-end']">
                             <span>{{ hour.location }}</span>
                             <Icon icon="ci:location" width="15px" class="inline" />
                         </div>
@@ -133,21 +130,13 @@
                 </div>
 
                 <!-- Mobile -->
-                <div v-for="coach in coaches" class="isolate grid w-full grid-cols-calendar grid-rows-1 xl:hidden">
+                <div v-if="isMobile()" v-for="coach in coaches"
+                    class="isolate grid w-full grid-cols-calendar grid-rows-1">
                     <div class="text-gray-700 text-sm grid place-content-center text-center">
                         <p class="-rotate-90">{{ coach.name }}</p>
                     </div>
-                    <button v-for="hour in coach.hours" :key="hour.index" type="button" :class="[
-                    (hour.isBooked && !hour.lookingFor) ? 'bg-red-500 cursor-default hover:bg-red-500' : 'bg-gray-50 text-gray-800  cursor-pointer',
-                    hour.isClosed ? 'bg-gray-400 hover:bg-gray-400 cursor-default' : '',
-                    hour.myBooked ? 'bg-emerald-600 hover:bg-emerald-700 cursor-pointer' : '',
-                    (!hour.isClosed && hour.isBooked && hour.lookingFor || !hour.isBooked && !hour.myBooked && !hour.isClosed) ? 'hover:bg-gray-200' : '',
-                    'flex h-20 flex-col py-1 px-2 focus:z-10 border border-gray-200 border-opacity-50']">
-                        <!-- <time :datetime="hour.date" :class="[
-                            'flex h-6 w-6 items-center justify-center rounded-full',
-                        ]">
-                            {{ hour.date }}
-                        </time> -->
+                    <button v-for="hour in coach.hours" :key="hour.id" type="button" :ref="`field${hour.id}`"
+                        class="flex h-20 flex-col py-1 px-2 focus:z-10 border border-gray-200 border-opacity-50">
                         <span class="sr-only">{{ hour.people.length }} people</span>
                         <div v-if="hour.people.length > 0 && hour.lookingFor" class="h-[75%]">
                             <div class="flex items-center space-x-1">
@@ -178,233 +167,527 @@
 
     </div>
 </template>
-  
+
 <script lang='ts'>
 import { Icon } from '@iconify/vue';
-import { MonthCalendar, Button } from '../components';
+import { MonthCalendar, Button, Modal } from '../components';
+
+function getFieldColor(color: String): string {
+    switch (color) {
+        case 'Booked':
+            return 'red';
+        case 'Free':
+            return 'white';
+        case 'Closed':
+            return 'grey';
+        case 'MyBookedConfirmed':
+            return 'green';
+        case 'MyBookedUncomfirmed':
+            return 'yellow';
+        default:
+            return 'grey';
+    }
+}
 
 export default {
     components: {
         Icon,
         MonthCalendar,
-        Button
+        Button,
+        Modal
+    },
+
+    props: {
+        showMyTraining: {
+            type: Boolean,
+            default: true,
+        },
     },
 
     data() {
         return {
             coaches: [
                 {
+                    id: 0,
                     name: 'Trener1',
+                    phone: '+48 111 111 111',
+                    email: 'trener1@email.com',
                     hours: [
-                        { index: '1', isBooked: true, isClosed: false, myBooked: false, location: '', people: [] },
-                        { index: '2', people: [], isBooked: false, isClosed: false, myBooked: false, location: '' },
-                        { index: '3', people: [], isBooked: false, isClosed: false, myBooked: false, location: '' },
-                        { index: '4', isBooked: true, isClosed: false, myBooked: false, location: '', people: [] },
-
-                        { index: '5', isBooked: false, people: [], myBooked: true, location: 'Hasta', isClosed: false },
                         {
-                            index: '6',
-                            isBooked: true,
-                            isClosed: false, myBooked: false,
-                            people: [
-                                { id: 1, name: 'Jan', href: '#' },
-                                { id: 2, name: 'Daniel', href: '#' },
-                                { id: 3, name: 'Test', href: '#' },
-                            ],
-                            location: 'CRS'
-                        },
-                        { index: '7', isBooked: true, people: [], isClosed: false, myBooked: false, location: '', },
-                        {
-                            index: '8',
-                            isBooked: true,
+                            id: 1,
+                            myBooked: false,
+                            confirmed: true,
+                            location: '',
+                            people: [],
+                            status: 'Closed',
                             lookingFor: 0,
-                            isClosed: false, myBooked: false,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 2,
+                            myBooked: false,
+                            confirmed: true,
+                            location: '',
+                            people: [],
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 3,
+                            myBooked: false,
+                            confirmed: true,
+                            location: '',
+                            people: [],
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 4,
+                            myBooked: false,
+                            confirmed: true,
+                            location: '',
+                            people: [],
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 5,
+                            myBooked: true,
+                            confirmed: true,
+                            location: 'Hasta',
+                            people: [],
+                            status: 'Booked',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 6,
+                            myBooked: false,
+                            confirmed: true,
                             people: [
                                 { id: 1, name: 'Jan', href: '#' },
                                 { id: 2, name: 'Daniel', href: '#' },
                                 { id: 3, name: 'Test', href: '#' },
                             ],
-                            location: 'Grape'
+                            location: 'CRS',
+                            status: 'Booked',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
                         },
-                        { index: '9', isBooked: false, people: [], myBooked: false, location: 'Hasta', isClosed: false },
-                        { index: '10', isBooked: true, people: [], isClosed: false, myBooked: false, location: '', },
-                        { index: '11', isBooked: true, people: [], isClosed: false, myBooked: false, location: '', },
                         {
-                            index: '12',
-                            isBooked: true,
-                            isClosed: false, myBooked: false,
+                            id: 7,
+                            myBooked: true,
+                            confirmed: false,
+                            location: 'Hasta',
+                            people: [],
+                            status: 'Booked',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: false,
+                        },
+                        {
+                            id: 8,
+                            lookingFor: 0,
+                            myBooked: false,
+                            confirmed: true,
+                            people: [
+                                { id: 1, name: 'Jan', href: '#' },
+                                { id: 2, name: 'Daniel', href: '#' },
+                                { id: 3, name: 'Test', href: '#' },
+                            ],
+                            location: 'Grape',
+                            status: 'Booked',
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 9,
+                            people: [],
+                            myBooked: false,
+                            confirmed: true, location: 'Hasta',
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 10,
+                            people: [],
+                            myBooked: false,
+                            confirmed: true, location: '',
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 11,
+                            people: [],
+                            myBooked: false,
+                            confirmed: true, location: '',
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: false,
+                        },
+                        {
+                            id: 12,
+                            myBooked: false,
+                            confirmed: true,
                             people: [{ id: 3, name: 'Jan', href: '#' }],
-                            location: 'CRS'
+                            location: 'CRS',
+                            status: 'Booked',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
                         },
                         {
-                            index: '13',
-                            isBooked: true,
+                            id: 13,
                             lookingFor: 1,
-                            isClosed: false, myBooked: false,
+                            myBooked: false,
+                            confirmed: true,
                             people: [
                                 { id: 1, name: 'Jan', href: '#' },
                                 { id: 2, name: 'Daniel', href: '#' },
                                 { id: 3, name: 'Test', href: '#' },
                             ],
-                            location: 'Grape'
+                            location: 'Grape',
+                            status: 'Booked',
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
                         },
                         {
-                            index: '14',
-                            isBooked: false,
-                            isClosed: false, myBooked: false, location: '',
+                            id: 14,
+                            myBooked: false,
+                            confirmed: true,
+                            location: '',
                             people: [
                             ],
+                            status: 'Closed',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: false,
                         },
                     ]
                 },
 
                 {
+                    id: 1,
                     name: 'Trener2',
+                    phone: '+48 222 222 222',
+                    email: 'trener2@email.com',
                     hours: [
-                        { index: '1', isBooked: true, isClosed: false, myBooked: false, location: '', people: [] },
-                        { index: '2', people: [], isBooked: false, isClosed: false, myBooked: false, location: '' },
-                        { index: '3', people: [], isBooked: false, isClosed: false, myBooked: false, location: '' },
-                        { index: '4', isBooked: true, isClosed: false, myBooked: false, location: '', people: [] },
                         {
-                            index: '5',
-                            isBooked: true,
-                            isClosed: false, myBooked: false,
-                            people: [
-                                { id: 1, name: 'Jan', href: '#' },
-                                { id: 2, name: 'Daniel', href: '#' },
-                                { id: 3, name: 'asd', href: '#' },
-                            ],
-                            location: 'Hasta'
-                        },
-                        {
-                            index: '6',
-                            isBooked: true,
-                            isClosed: false, myBooked: false,
-                            people: [
-                                { id: 1, name: 'Jan', href: '#' },
-                                { id: 2, name: 'Daniel', href: '#' },
-                                { id: 3, name: 'Test', href: '#' },
-                            ],
-                            location: 'CRS'
-                        },
-                        { index: '7', isBooked: true, people: [], isClosed: false, myBooked: false, location: '', },
-                        {
-                            index: '8',
-                            isBooked: true,
+                            id: 15,
+                            myBooked: false,
+                            confirmed: true,
+                            location: '',
+                            people: [],
+                            status: 'Closed',
                             lookingFor: 0,
-                            isClosed: false, myBooked: false,
-                            people: [
-                                { id: 1, name: 'Jan', href: '#' },
-                                { id: 2, name: 'Daniel', href: '#' },
-                                { id: 3, name: 'Test', href: '#' },
-                                { id: 4, name: 'asd', href: '#' },
-                            ],
-                            location: 'Grape'
-                        },
-                        { index: '9', isBooked: true, people: [], myBooked: true, location: 'Hasta', isClosed: false },
-                        { index: '10', isBooked: true, people: [], isClosed: false, myBooked: false, location: '', },
-                        { index: '11', isBooked: true, people: [], isClosed: false, myBooked: false, location: '', },
-                        {
-                            index: '12',
-                            isBooked: true,
-                            isClosed: false, myBooked: false,
-                            people: [{ id: 3, name: 'Jan', href: '#' }],
-                            location: 'CRS'
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
                         },
                         {
-                            index: '13',
-                            isClosed: false, myBooked: false,
-                            isBooked: true,
-                            people: [{ id: 6, name: "Jan", href: '#' }],
-                            location: 'CRS'
-                        },
-                        {
-                            index: '14',
-                            isBooked: false,
-                            isClosed: false, myBooked: false, location: '',
-                            people: [
-                            ],
-                        },
-                    ]
-                },
-
-                {
-                    name: 'Trener3',
-                    hours: [
-                        { index: '1', isBooked: true, isClosed: false, myBooked: false, location: '', people: [] },
-                        { index: '2', people: [], isBooked: false, isClosed: false, myBooked: false, location: '' },
-                        { index: '3', people: [], isBooked: false, isClosed: false, myBooked: false, location: '' },
-                        { index: '4', isBooked: true, isClosed: false, myBooked: false, location: '', people: [] },
-                        {
-                            index: '5',
-                            isBooked: true,
-                            isClosed: false, myBooked: false,
-                            people: [
-                                { id: 1, name: 'Jan', href: '#' },
-                                { id: 2, name: 'Daniel', href: '#' },
-                                { id: 3, name: 'Test', href: '#' },
-                            ],
-                            location: 'Hasta'
-                        },
-                        {
-                            index: '6',
-                            isBooked: true,
-                            isClosed: false, myBooked: false,
-                            people: [
-                                { id: 1, name: 'Jan', href: '#' },
-                                { id: 2, name: 'Daniel', href: '#' },
-                                { id: 3, name: 'Test', href: '#' },
-                            ],
-                            location: 'CRS'
-                        },
-                        { index: '7', isBooked: true, people: [], isClosed: false, myBooked: false, location: '', },
-                        {
-                            index: '8',
-                            isBooked: true,
+                            id: 16,
+                            myBooked: false,
+                            confirmed: true,
+                            location: '',
+                            people: [],
+                            status: 'Free',
                             lookingFor: 0,
-                            isClosed: false, myBooked: false,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: false,
+                        },
+                        {
+                            id: 17,
+                            myBooked: false,
+                            confirmed: false,
+                            location: '',
+                            people: [],
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 18,
+                            myBooked: false,
+                            confirmed: true,
+                            location: '',
+                            people: [],
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 19,
+                            myBooked: true,
+                            confirmed: false,
+                            location: 'Hasta',
+                            people: [],
+                            status: 'Booked',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: false,
+                        },
+                        {
+                            id: 20,
+                            myBooked: false,
+                            confirmed: true,
                             people: [
                                 { id: 1, name: 'Jan', href: '#' },
                                 { id: 2, name: 'Daniel', href: '#' },
                                 { id: 3, name: 'Test', href: '#' },
                             ],
-                            location: 'Grape'
+                            location: 'CRS',
+                            status: 'Booked',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
                         },
-                        { index: '9', isBooked: true, people: [], myBooked: false, location: 'Hasta', isClosed: false },
-                        { index: '10', isBooked: true, people: [], isClosed: false, myBooked: false, location: '', },
-                        { index: '11', isBooked: true, people: [], isClosed: false, myBooked: false, location: '', },
                         {
-                            index: '12',
-                            isBooked: true,
-                            isClosed: false, myBooked: false,
+                            id: 21,
+                            myBooked: true,
+                            confirmed: false,
+                            location: 'Hasta',
+                            people: [],
+                            status: 'Booked',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: false,
+                        },
+                        {
+                            id: 22,
+                            lookingFor: 0,
+                            myBooked: false,
+                            confirmed: true,
+                            people: [
+                                { id: 1, name: 'Jan', href: '#' },
+                                { id: 2, name: 'Daniel', href: '#' },
+                                { id: 3, name: 'Test', href: '#' },
+                            ],
+                            location: 'Grape',
+                            status: 'Booked',
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 23,
+                            people: [],
+                            myBooked: false,
+                            confirmed: true, location: 'Hasta',
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 24,
+                            people: [],
+                            myBooked: false,
+                            confirmed: true, location: '',
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: false,
+                        },
+                        {
+                            id: 25,
+                            people: [],
+                            myBooked: false,
+                            confirmed: true, location: '',
+                            status: 'Free',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
+                        },
+                        {
+                            id: 26,
+                            myBooked: false,
+                            confirmed: true,
                             people: [{ id: 3, name: 'Jan', href: '#' }],
-                            location: 'CRS'
+                            location: 'CRS',
+                            status: 'Booked',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: false,
                         },
                         {
-                            index: '13',
-                            isClosed: false, myBooked: false,
-                            isBooked: true,
-                            people: [{ id: 6, name: "Jan", href: '#' }],
-                            location: 'CRS'
+                            id: 27,
+                            lookingFor: 1,
+                            myBooked: false,
+                            confirmed: true,
+                            people: [
+                                { id: 1, name: 'Jan', href: '#' },
+                                { id: 2, name: 'Daniel', href: '#' },
+                                { id: 3, name: 'Test', href: '#' },
+                            ],
+                            location: 'Grape',
+                            status: 'Booked',
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
                         },
                         {
-                            index: '14',
-                            isBooked: false,
-                            isClosed: false, myBooked: false, location: '',
+                            id: 28,
+                            myBooked: false,
+                            confirmed: true,
+                            location: '',
                             people: [
                             ],
+                            status: 'Closed',
+                            lookingFor: 0,
+                            time: '16:00',
+                            date: '22-12-20222',
+                            canBeRebooked: true,
                         },
                     ]
                 },
             ],
+
             dayCalendarShow: false,
+
+            title: 'title',
+            hourContent: 'hour',
+            coachContent: 'coach',
         }
+    },
+
+    mounted() {
+        this.coaches.forEach(coach => {
+            coach.hours.forEach(hour => {
+                this.setFieldColor(hour);
+            });
+        });
     },
 
     methods: {
         showCalendar() {
             this.dayCalendarShow = !this.dayCalendarShow;
+        },
+
+        openModal(hour: any, message: string, coach: any) {
+            if (hour.myBooked == true || hour.lookingFor >= 1 || hour.status == 'Free') {
+                this.title = hour.id.toString();
+                this.hourContent = hour;
+                this.coachContent = coach;
+
+                (this.$refs.modal as any).toggleModal();
+
+                return;
+            }
+        },
+
+        setFieldColor(hour: any) {
+            const fieldElement = this.$refs[`field${hour.id}`] as any;
+
+            if (hour.myBooked == true && hour.confirmed == true) {
+                fieldElement[0].classList.add('green')
+                return;
+            }
+
+            if (hour.myBooked == true && hour.confirmed == false) {
+                fieldElement[0].classList.add('yellow')
+                return;
+            }
+
+            if (hour.lookingFor >= 1) {
+                fieldElement[0].classList.add('white')
+                return;
+            }
+
+            fieldElement[0].classList.add(getFieldColor(hour.status))
+        },
+
+        isMobile() {
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true
+            } else {
+                return false
+            }
         }
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.white {
+    cursor: pointer;
+    background-color: rgb(248, 248, 248);
+
+    &:hover {
+        background-color: darken(rgb(248, 248, 248), 10%);
+    }
+}
+
+.green {
+    cursor: pointer;
+    background-color: rgb(16 185 129);
+
+    &:hover {
+        background-color: darken(rgb(16 185 129), 7%);
+    }
+}
+
+.yellow {
+    cursor: pointer;
+    background-color: rgb(228, 189, 83);
+
+    &:hover {
+        background-color: darken(rgb(228, 189, 83), 15%);
+    }
+}
+
+.red {
+    background-color: rgb(219, 64, 64);
+
+    // &:hover {
+    // background-color: darken(rgb(219, 64, 64), 10%);
+    // }
+}
+
+.grey {
+    background-color: rgb(138, 138, 138);
+
+    // &:hover {
+    // background-color: darken(rgb(138, 138, 138), 10%);
+    // }
+}
+</style>
