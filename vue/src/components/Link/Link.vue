@@ -1,6 +1,6 @@
 <template>
-    <router-link :to="link">
-        <span class="text-secondaryColor underline">
+    <router-link :to="{ name: link }">
+        <span class="text-secondaryColor" :class="{ underline: underline, 'text-primaryBlack': black }">
             <slot></slot>
         </span>
     </router-link>
@@ -9,6 +9,14 @@
 export default {
     props: {
         link: String,
+        underline: {
+            default: true,
+            type: Boolean
+        },
+        black: {
+            default: false,
+            type: Boolean
+        },
     }
 }
 </script>
