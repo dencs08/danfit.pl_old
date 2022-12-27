@@ -17,7 +17,7 @@
             </div>
         </div>
         <header class="relative pt-28 mb-10">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto  max-w-screen-2xl  px-4 sm:px-6 lg:px-8">
                 <h1 class="text-3xl font-bold tracking-tight text-white">Moje konto</h1>
             </div>
         </header>
