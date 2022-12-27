@@ -1,6 +1,6 @@
 <template>
     <footer class="pt-14 pb-8 bg-gray-900">
-        <div class="container md:flex md:justify-between space-x-10">
+        <div class="container md:flex md:justify-between md:space-x-10">
             <div class="mb-24 md:mb-0">
                 <router-link to="/start" class="flex items-center">
                     <img src="../../assets/logos/danfit_logo_white.svg" class="mr-3 h-8" alt="danfit Logo" />
@@ -25,7 +25,7 @@
                     <h2 class="mb-6 text-sm font-semibold uppercase text-white">Menu</h2>
                     <ul class="text-gray-400 space-y-4">
                         <li v-for="link in menu">
-                            <router-link :to="link.to" class="hover:underline">{{ link.name }}</router-link>
+                            <router-link :to="{ name: link.to }" class="hover:underline">{{ link.name }}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -41,7 +41,7 @@
                     <h2 class="mb-6 text-sm font-semibold uppercase text-white">O Stronie</h2>
                     <ul class="text-gray-400 space-y-4">
                         <li v-for="link in privacy">
-                            <router-link :to="link.to" class="hover:underline">{{ link.name }}</router-link>
+                            <router-link :to="{ name: link.to }" class="hover:underline">{{ link.name }}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -78,18 +78,19 @@ export default {
     data() {
         return {
             menu: [
-                { name: 'Start', to: '#' },
-                { name: 'Oferta', to: '#' },
-                { name: 'Dlaczego my', to: '#' },
-                { name: 'Zarezerwuj trening', to: '#' },
+                { name: 'Start', to: 'Start' },
+                { name: 'Oferta', to: 'Start' },
+                { name: 'O nas', to: 'Start' },
+                { name: 'Kontakt', to: 'Contact' },
+                { name: 'Zarezerwuj trening', to: 'Calendar' },
             ],
             contact: [
                 { name: 'biuro@danfit.pl', to: '#' },
                 { name: '882 031 130', to: '#' },
             ],
             privacy: [
-                { name: 'Polityka prywatności', to: '#' },
-                { name: 'Warunki korzystania', to: '#' },
+                { name: 'Polityka prywatności', to: 'Privacy' },
+                { name: 'Warunki korzystania', to: 'Terms' },
             ]
         }
     }
