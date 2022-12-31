@@ -20,6 +20,16 @@ export default {
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+span {
+    text-decoration: none;
+}
 
+.underline {
+    &:after {
+        content: "";
+        border-bottom: solid 1px;
+        border-color: aqua;
+    }
+}
 </style>
