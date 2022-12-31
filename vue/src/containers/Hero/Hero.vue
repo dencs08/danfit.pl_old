@@ -11,14 +11,14 @@
                         <h2>
                             Najlepsze treningi squasha w Zielonej Górze,
                             <span>
-                                <Link link="Calendar">zapisz się</Link>
+                                <Link link="Calendar" :underline="true">zapisz się</Link>
                             </span>
                             i zacznij trenować z nami!
                         </h2>
                     </div>
 
                     <router-link :to="{ name: 'Calendar' }">
-                        <Button class="w-full sm:w-auto btn-lg">{{ buttonText }}</Button>
+                        <Button class="w-full sm:w-auto btn-lg btn-primary">{{ buttonText }}</Button>
                     </router-link>
                 </div>
             </div>
