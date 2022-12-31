@@ -19,7 +19,7 @@
 
             </div>
             <div class="mt-4 flex justify-end pb-4">
-                <Button class="btn-xs">Zapisz</Button>
+                <Button size="xs">Zapisz</Button>
             </div>
         </div>
 
@@ -37,7 +37,7 @@
             </div>
 
             <div class="mt-4 flex justify-end pb-4">
-                <Button class="btn-xs">Zapisz</Button>
+                <Button size="xs">Zapisz</Button>
             </div>
         </div>
 
@@ -48,6 +48,7 @@
                     <h2 class="text-lg font-medium leading-6 text-gray-900">Prywatność</h2>
                 </div>
                 <ul role="list" class="mt-2 divide-y divide-gray-200">
+
                     <SwitchGroup as="li" class="flex items-center justify-between py-4">
                         <div class="flex flex-col">
                             <SwitchLabel as="p" class="text-sm font-medium text-gray-900" passive>
@@ -58,12 +59,9 @@
                                 zapisaleś.
                             </SwitchDescription>
                         </div>
-                        <Switch v-model="user.privateSurName"
-                            :class="[user.privateSurName ? 'bg-teal-500' : 'bg-gray-200', 'relative ml-4 inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2']">
-                            <span aria-hidden="true"
-                                :class="[user.privateSurName ? 'translate-x-5' : 'translate-x-0', 'inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />
-                        </Switch>
+                        <SwitchCustom :state="user.privateSurName" :icons="false" />
                     </SwitchGroup>
+
                     <SwitchGroup as="li" class="flex items-center justify-between py-4">
                         <div class="flex flex-col">
                             <SwitchLabel as="p" class="text-sm font-medium text-gray-900" passive>
@@ -71,17 +69,13 @@
                             <SwitchDescription class="text-sm text-gray-500">Zaznacz, aby Twoje
                                 konto było ukryte dla wszystkich.</SwitchDescription>
                         </div>
-                        <Switch v-model="user.privateAccount"
-                            :class="[user.privateAccount ? 'bg-teal-500' : 'bg-gray-200', 'relative ml-4 inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2']">
-                            <span aria-hidden="true"
-                                :class="[user.privateAccount ? 'translate-x-5' : 'translate-x-0', 'inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />
-                        </Switch>
+                        <SwitchCustom :state="user.privateAccount" :icons="false" />
                     </SwitchGroup>
                 </ul>
             </div>
             <div class="mt-4 flex justify-end py-4 space-x-3">
-                <Button class="btn-xs btn-secondary">Anuluj</Button>
-                <Button class="btn-xs">Zapisz</Button>
+                <Button size="xs" styling="white">Anuluj</Button>
+                <Button size="xs">Zapisz</Button>
             </div>
         </div>
     </form>
@@ -94,7 +88,7 @@ import {
     SwitchLabel,
 } from '@headlessui/vue'
 
-import { Button, Link, InputCustom } from '../../components';
+import { Button, Link, InputCustom, SwitchCustom } from '../../components';
 
 export default {
     components: {
@@ -102,7 +96,7 @@ export default {
         SwitchDescription,
         SwitchGroup,
         SwitchLabel,
-        Button, Link, InputCustom
+        Button, Link, InputCustom, SwitchCustom
     },
 
     data() {
