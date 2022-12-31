@@ -4,6 +4,8 @@ export { default as Link } from "./Link/Link.vue";
 export { default as Button } from "./Button/Button.vue";
 export { default as InputCustom } from "./InputCustom.vue";
 export { default as TextAreaCustom } from "./TextAreaCustom.vue";
+export { default as SwitchCustom } from "./SwitchCustom.vue";
+export { default as Tooltip } from "./Tooltip.vue";
 
 export { default as Modal } from "./Modal.vue";
 
