@@ -4,7 +4,7 @@
             <h3>Rezerwacje</h3>
 
             <div>
-                <DayCalendar class="mt-3" />
+                <DayCalendar />
             </div>
         </div>
     </section>
