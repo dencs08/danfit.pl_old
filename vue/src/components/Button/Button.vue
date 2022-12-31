@@ -1,6 +1,5 @@
 <template>
-    <button
-        class="btn rounded-full bg-gradient-to-r from-secondaryColor to-emerald-600 hover:scale-[1.035] transtion-all duration-200 text-primaryWhite font-semibold">
+    <button class="btn rounded-full text-primaryWhite font-semibold" :class="['btn-' + styling, 'btn-' + size]">
         <slot></slot>
     </button>
 </template>
@@ -9,6 +8,18 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
+    props: {
+        styling: {
+            type: String,
+            default: "primary",
+            validator: value => ['primary', 'danger', 'white', 'success'].includes(value as string),
+        },
+        size: {
+            type: String,
+            default: "md",
+            validator: value => ['xs', 'sm', 'md', 'lg'].includes(value as string),
+        },
+    },
     mounted() {
 
     },
@@ -45,5 +56,37 @@ export default defineComponent({
 
 .btn-lg {
     font-size: clamp(0.85rem, 1vw, 2.5rem) !important;
+}
+
+.btn-primary {
+    background: linear-gradient(60deg,
+            rgb(6 182 212) 0%,
+            rgb(16 185 129) 30%,
+            rgb(6 182 212) 75%,
+            rgb(16 185 129) 100%);
+
+    background-size: 500% 200%;
+    background-position: 10% 0;
+
+    transition: all 0.5s;
+
+    &:hover {
+        background-position: 100% 0;
+    }
+}
+
+.btn-danger {
+    background: rgb(153 27 27);
+}
+
+.btn-white {
+    background: rgb(241 245 249);
+    color: #686868;
+
+    border: 1px solid #dfdfdf;
+}
+
+.btn-success {
+    background: rgb(16 185 129);
 }
 </style>
