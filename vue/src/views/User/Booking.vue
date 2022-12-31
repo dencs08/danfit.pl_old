@@ -3,7 +3,7 @@
         <h6>Rezerwacje</h6>
         <p>Tu możesz dokonać rezerwacji na trening.</p>
 
-        <DayCalendar class="w-[110%]" />
+        <DayCalendar />
     </div>
 </template>
 <script lang="ts">
