@@ -4,8 +4,8 @@
             <slot />
         </div>
         <transition name="tooltip-fade">
-            <div class="opacity-[0.9] absolute pointer-events-none z-[100]" :class="'tooltip-' + position"
-                v-if="visible">
+            <div class="opacity-[0.9] absolute pointer-events-none z-[100] hidden md:block"
+                :class="'tooltip-' + position" v-if="visible">
                 <button class="px-4 py-2 text-white text-xs rounded-full bg-gray-700 min-w-[50px] w-max max-w-[250px]">
                     {{ text }}
                 </button>
