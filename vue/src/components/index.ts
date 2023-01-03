@@ -6,7 +6,11 @@ export { default as InputCustom } from "./InputCustom.vue";
 export { default as TextAreaCustom } from "./TextAreaCustom.vue";
 export { default as SwitchCustom } from "./SwitchCustom.vue";
 export { default as Tooltip } from "./Tooltip.vue";
+export { default as SelectMenu } from "./SelectMenu.vue";
 
+export { default as ModalEditTraining } from "./ModalEditTraining.vue";
+export { default as ModalJoinTraining } from "./ModalJoinTraining.vue";
+export { default as ModalNewTraining } from "./ModalNewTraining.vue";
 export { default as Modal } from "./Modal.vue";
 
 export { default as AccountSidebar } from "./AccountSidebar.vue";

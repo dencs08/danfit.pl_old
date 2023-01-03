@@ -33,7 +33,7 @@
                         day.isSelected && 'text-white',
                         !day.isSelected && day.isCurrentMonth && !day.isToday && 'text-gray-900',
                         !day.isSelected && !day.isCurrentMonth && !day.isToday && 'text-gray-400',
-                        day.isToday && !day.isSelected && 'text-gray-700 bg-emerald-600',
+                        day.isToday && !day.isSelected && 'text-gray-100 bg-emerald-600',
                         dayIdx === 0 && 'rounded-tl-lg',
                         dayIdx === 6 && 'rounded-tr-lg',
                         dayIdx === days.length - 7 && 'rounded-bl-lg',
@@ -41,7 +41,7 @@
                     ]">
                         <time :datetime="day.date" :class="
                         ['mx-auto flex h-7 w-7 items-center justify-center rounded-full',
-                            day.isSelected && day.isToday && 'bg-indigo-600',
+                            day.isSelected && day.isToday && 'bg-emerald-500',
                             day.isSelected && !day.isToday && 'bg-gray-900'
                         ]">
                             {{ day.date.split('-').pop()?.replace(/^0/, '') }}

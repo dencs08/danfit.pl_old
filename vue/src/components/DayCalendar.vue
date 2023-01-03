@@ -1,9 +1,9 @@
 <template>
-    <Modal ref="modal" :title="title" :hourContent="(hourContent as Object)" :coachContent="(coachContent as Object)" />
+    <Modal ref="Modal" />
 
-    <div v-if="showMyTraining" class="h-10 space-x-4 flex justify-end items-center">
+    <div class="h-10 space-x-4 flex justify-end items-center">
         <router-link :to="{ name: 'MyTrainings' }">
-            <Button class="btn-xs hidden sm:block mb-4">Wyświetl moje treningi</Button>
+            <Button size="xs" class="hidden sm:block mb-4">Wyświetl moje treningi</Button>
         </router-link>
     </div>
 
@@ -13,7 +13,7 @@
             <div class="relative sm:flex justify-center items-end sm:space-x-3 mb-3">
                 <div class="flex-row">
                     <div class="text-xs mb-1">Wybierz datę:</div>
-                    <Button class="btn-xs" @click="showCalendar">
+                    <Button size="xs" @click="showCalendar">
                         <div class="flex justify-center space-x-2">
                             <span>31.12.2022</span>
                             <Icon icon="material-symbols:calendar-month" width="20px" class="inline" />
@@ -22,7 +22,7 @@
                     <div>
                         <Transition name="fade" mode="out-in">
                             <div v-if="dayCalendarShow"
-                                class="absolute top-[120%] left-[50%] translate-x-[-50%] opacity-1 block z-[99] min-w-[100%] sm:min-w-[350px] 2xl:w-[20vw]">
+                                class="absolute top-[120%] left-[100%] translate-x-[-50%] opacity-1 block z-[99] min-w-[250px] sm:min-w-[350px] 2xl:w-[20vw]">
                                 <div class="p-2 bg-white border-1 rounded-2xl border border-gray-300 shadow-xl">
                                     <MonthCalendar />
                                 </div>
@@ -31,12 +31,9 @@
                     </div>
                 </div>
 
-                <div>
-                    <select id="location" name="location"
-                        class="mt-1 block w-full rounded-full border-gray-300 py-2 pl-3 pr-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 text-sm">
-                        <option selected>Zielona góra</option>
-                        <option>Legnica</option>
-                    </select>
+                <div v-if="false">
+                    <SelectMenu class="min-w-[155px]" label="Miasto"
+                        :list="[{ id: 0, name: 'Zielona Góra' }, { id: 1, name: 'Legnica' }]" />
                 </div>
             </div>
             <div class="flex items-center mb-2">
@@ -61,7 +58,7 @@
         <!-- Calendar info top row -->
         <div class="overflow-x-auto min-h-full px-[2px]">
             <div
-                class="shadow mb-1 ring-1 ring-black ring-opacity-5 xl:flex xl:flex-auto xl:flex-col w-[250vw] sm:w-[150vw]  lg:w-auto">
+                class="shadow mb-1 ring-1 ring-black ring-opacity-5 xl:flex xl:flex-auto xl:flex-col w-[250vw] sm:w-[175vw] md:w-[150vw] lg:w-[125vw] xl:w-auto">
                 <div
                     class="grid grid-cols-calendar gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold leading-6 text-gray-700 xl:flex-none">
                     <div class="bg-white py-2">Trener</div>
@@ -91,10 +88,10 @@
                     </div>
 
                     <!-- Coach Hours -->
-                    <div v-for="hour in coach.hours" :key="hour.id" @click="openModal(hour, 'message', coach)"
+                    <div v-for="hour in coach.hours" :key="hour.id" @click="openModal(hour, coach)"
                         class="relative py-1 px-2 border-[1px] border-gray-200 border-opacity-50"
                         :ref="`field${hour.id}`">
-                        <div v-if="hour.people.length > 0 && hour.lookingFor"
+                        <div v-if="!hour.myBooked && hour.people.length > 0 && hour.lookingFor"
                             class="flex justify-between text-xs h-[75%]" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="Ci gracze szukają kogoś do gry, zapisz się!">
                             <ol>
@@ -135,10 +132,11 @@
                     <div class="text-gray-700 text-sm grid place-content-center text-center">
                         <p class="-rotate-90">{{ coach.name }}</p>
                     </div>
-                    <button v-for="hour in coach.hours" :key="hour.id" type="button" :ref="`field${hour.id}`"
+                    <button v-for="hour in coach.hours" :key="hour.id" type="button" @click="openModal(hour, coach)"
+                        :ref="`field${hour.id}`"
                         class="flex h-20 flex-col py-1 px-2 focus:z-10 border border-gray-200 border-opacity-50">
                         <span class="sr-only">{{ hour.people.length }} people</span>
-                        <div v-if="hour.people.length > 0 && hour.lookingFor" class="h-[75%]">
+                        <div v-if="!hour.myBooked && hour.people.length > 0 && hour.lookingFor" class="h-[75%]">
                             <div class="flex items-center space-x-1">
                                 <Icon icon="material-symbols:search-rounded" width="15px" />
                                 <span>{{ hour.lookingFor }}</span>
@@ -170,7 +168,7 @@
 
 <script lang='ts'>
 import { Icon } from '@iconify/vue';
-import { MonthCalendar, Button, Modal } from '../components';
+import { MonthCalendar, Button, Modal, ModalEditTraining, ModalJoinTraining, ModalNewTraining, SelectMenu } from '../components';
 
 function getFieldColor(color: String): string {
     switch (color) {
@@ -194,14 +192,11 @@ export default {
         Icon,
         MonthCalendar,
         Button,
-        Modal
-    },
-
-    props: {
-        showMyTraining: {
-            type: Boolean,
-            default: true,
-        },
+        ModalEditTraining,
+        ModalJoinTraining,
+        ModalNewTraining,
+        Modal,
+        SelectMenu
     },
 
     data() {
@@ -224,6 +219,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: '0'
                         },
                         {
                             id: 2,
@@ -236,6 +234,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: '0'
                         },
                         {
                             id: 3,
@@ -248,6 +249,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: '0'
                         },
                         {
                             id: 4,
@@ -260,18 +264,26 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: '0'
                         },
                         {
                             id: 5,
                             myBooked: true,
                             confirmed: true,
                             location: 'Hasta',
-                            people: [],
+                            people: [{
+                                id: 1, name: 'Daniel'
+                            }],
                             status: 'Booked',
                             lookingFor: 0,
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Adult',
+                            skillPreference: 'Advanced',
+                            sizePreference: 1
                         },
                         {
                             id: 6,
@@ -288,18 +300,26 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 3
                         },
                         {
                             id: 7,
                             myBooked: true,
                             confirmed: false,
                             location: 'Hasta',
-                            people: [],
+                            people: [{
+                                id: 1, name: 'Daniel'
+                            }],
                             status: 'Booked',
                             lookingFor: 0,
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: false,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 1
                         },
                         {
                             id: 8,
@@ -316,6 +336,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 3
                         },
                         {
                             id: 9,
@@ -327,6 +350,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 10,
@@ -338,6 +364,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 11,
@@ -349,6 +378,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: false,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 12,
@@ -361,22 +393,27 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 1
                         },
                         {
                             id: 13,
-                            lookingFor: 1,
+                            lookingFor: 2,
                             myBooked: false,
                             confirmed: true,
                             people: [
                                 { id: 1, name: 'Jan', href: '#' },
                                 { id: 2, name: 'Daniel', href: '#' },
-                                { id: 3, name: 'Test', href: '#' },
                             ],
                             location: 'Grape',
                             status: 'Booked',
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 2
                         },
                         {
                             id: 14,
@@ -390,6 +427,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: false,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 2
                         },
                     ]
                 },
@@ -411,6 +451,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 16,
@@ -423,6 +466,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: false,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 17,
@@ -435,6 +481,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 18,
@@ -447,18 +496,27 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 19,
                             myBooked: true,
                             confirmed: false,
                             location: 'Hasta',
-                            people: [],
+                            people: [
+                                { id: 1, name: 'Jan', href: '#' },
+                                { id: 2, name: 'Daniel', href: '#' },
+                            ],
                             status: 'Booked',
-                            lookingFor: 0,
+                            lookingFor: 1,
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: false,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 2
                         },
                         {
                             id: 20,
@@ -475,18 +533,26 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 3
                         },
                         {
                             id: 21,
                             myBooked: true,
                             confirmed: false,
                             location: 'Hasta',
-                            people: [],
+                            people: [{
+                                id: 1, name: 'Daniel'
+                            }],
                             status: 'Booked',
                             lookingFor: 0,
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: false,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 1
                         },
                         {
                             id: 22,
@@ -503,6 +569,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 3
                         },
                         {
                             id: 23,
@@ -514,6 +583,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 24,
@@ -525,6 +597,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: false,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 25,
@@ -536,6 +611,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 26,
@@ -548,12 +626,15 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: false,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                         {
                             id: 27,
                             lookingFor: 1,
                             myBooked: false,
-                            confirmed: true,
+                            confirmed: false,
                             people: [
                                 { id: 1, name: 'Jan', href: '#' },
                                 { id: 2, name: 'Daniel', href: '#' },
@@ -564,6 +645,9 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 3
                         },
                         {
                             id: 28,
@@ -577,16 +661,15 @@ export default {
                             time: '16:00',
                             date: '22-12-20222',
                             canBeRebooked: true,
+                            agePreference: 'Junior',
+                            skillPreference: 'Intermediate',
+                            sizePreference: 0
                         },
                     ]
                 },
             ],
 
             dayCalendarShow: false,
-
-            title: 'title',
-            hourContent: 'hour',
-            coachContent: 'coach',
         }
     },
 
@@ -603,14 +686,25 @@ export default {
             this.dayCalendarShow = !this.dayCalendarShow;
         },
 
-        openModal(hour: any, message: string, coach: any) {
-            if (hour.myBooked == true || hour.lookingFor >= 1 || hour.status == 'Free') {
-                this.title = hour.id.toString();
-                this.hourContent = hour;
-                this.coachContent = coach;
+        openModal(hour: any, coach: any) {
+            if (hour.myBooked == true || hour.lookingFor >= 1 || hour.status == 'Free') (this.$refs.Modal as any).updateModalInfo(hour, coach);
 
-                (this.$refs.modal as any).toggleModal();
+            if (hour.myBooked == true) {
+                console.log("myBooked");
 
+                (this.$refs.Modal as any).showEditContent();
+                return;
+            }
+            if (hour.lookingFor >= 1) {
+                console.log("lookingFor");
+
+                (this.$refs.Modal as any).showJoinContent();
+                return;
+            }
+            if (hour.status == 'Free') {
+                console.log("Free");
+
+                (this.$refs.Modal as any).showNewContent();
                 return;
             }
         },
