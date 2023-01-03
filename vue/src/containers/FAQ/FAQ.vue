@@ -40,16 +40,16 @@ export default {
         return {
             columns: [
                 [
-                    { question: 'Gdzie prowadzone są treningi?', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' },
+                    { question: 'Gdzie prowadzone są treningi?', answer: 'Zajęcia prowadzimy na całym terenie Zielonej Góry, kiedy rezerwujesz trening zaznacz miejsce treningu a następnie poczekaj na potwierdzenie od trenera.' },
                     { question: 'Co wziąć ze sobą?', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' }
                 ],
                 [
                     { question: 'Ile trwają zajęcia?', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' },
-                    { question: 'Kolejne pytanie', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' }
+                    { question: 'Kiedy mogę odrezerwować trening?', answer: 'Aby bezkosztowo odrezerwować trening należy to zrobić conajmniej 1 dzień przed treningiem.' }
                 ],
                 [
                     { question: 'Jaki jest koszt zajęć?', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' },
-                    { question: 'Kolejne pytanie', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' }
+                    { question: 'Dlaczego nie mogę zarezerwować treningu?', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' }
                 ]
             ]
         }
