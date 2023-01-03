@@ -24,7 +24,7 @@
                         się
                     </router-link>
                     <router-link :to="{ name: 'Register' }">
-                        <Button class="btn-xs">Zarejestruj się</Button>
+                        <Button size="xs">Zarejestruj się</Button>
                     </router-link>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                         </div>
                         <div>
                             <router-link :to="{ name: 'Register' }" class="w-screen">
-                                <Button class="w-full btn-sm">Zarejestruj się</Button>
+                                <Button class="w-full" size="sm">Zarejestruj się</Button>
                             </router-link>
                             <p class="mt-6 text-center text-base font-medium text-gray-500">
                                 Masz już konto?
