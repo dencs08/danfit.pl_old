@@ -14,9 +14,9 @@
             </div>
         </div>
         <div class="container">
-            <div class="grid grid-cols-1 gap-10 md:gap-16 lg:grid-cols-3">
-                <div v-for="column in columns" class="space-y-10 md:space-y-16">
-                    <div v-for="element in column">
+            <div class="grid grid-cols-1 gap-10 lg:gap-16 sm:grid-cols-2 lg:grid-cols-3">
+                <div v-for="column in columns" class="space-y-12 lg:space-y-16">
+                    <div v-for="element in column" class="lg:min-h-[150px]">
                         <h6 class="mb-1 lg:mb-4">
                             {{ element.question }}
                         </h6>
@@ -40,16 +40,16 @@ export default {
         return {
             columns: [
                 [
-                    { question: 'Gdzie prowadzone są treningi?', answer: 'Zajęcia prowadzimy na całym terenie Zielonej Góry, kiedy rezerwujesz trening zaznacz miejsce treningu a następnie poczekaj na potwierdzenie od trenera.' },
-                    { question: 'Co wziąć ze sobą?', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' }
+                    { question: 'Gdzie prowadzone są treningi?', answer: 'Zajęcia prowadzimy w kilku miastach w Polsce, kiedy rezerwujesz trening zaznacz miejsce treningu a następnie poczekaj na potwierdzenie od trenera.' },
+                    { question: 'Co wziąć ze sobą?', answer: 'W większości przypadków wystarczą Ci buty halowe (nierysujące podłoża) i strój na przebranie, może zdarzyć się jednak, że klub (lub trener) nie jest wyposażony w rakiety - w takim wypadku musisz mieć również swoją rakiete.' }
                 ],
                 [
-                    { question: 'Ile trwają zajęcia?', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' },
-                    { question: 'Kiedy mogę odrezerwować trening?', answer: 'Aby bezkosztowo odrezerwować trening należy to zrobić conajmniej 1 dzień przed treningiem.' }
+                    { question: 'Ile trwają zajęcia?', answer: 'Każdy trener sam ustala ile będą trwały jego zajęcia - zazwyczaj jednak jest to 1 godzina.' },
+                    { question: 'Kiedy mogę odrezerwować trening?', answer: 'Aby bezkosztowo odrezerwować trening należy to zrobić conajmniej 1 dzień przed treningiem. W wyjątkowych przypadkach za porozumieniem z trenerem można zrobić to bez kosztów niezależnie od terminu odwołania.' }
                 ],
                 [
-                    { question: 'Jaki jest koszt zajęć?', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' },
-                    { question: 'Dlaczego nie mogę zarezerwować treningu?', answer: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e sit amet, consectetur, sed do eiusmod, sed do e.' }
+                    { question: 'Jaki jest koszt zajęć?', answer: 'Koszt zajęć uzależniony jest od kilku czynników, typ treningu, jego godzina, czas, region.W naszym systemie rezerwacji z góry wiesz ile zapłacisz - wystarczy wybrać trening i sprawdzić ile będzie on nas kosztował.' },
+                    // { question: 'Dlaczego nie mogę zarezerwować treningu?', answer: '' }
                 ]
             ]
         }
