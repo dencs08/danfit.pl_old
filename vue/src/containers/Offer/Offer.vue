@@ -50,29 +50,29 @@ export default {
             features: [
                 {
                     title: 'Dla dzieci',
-                    subtitle: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor inc sed do eiusmod tempor inc.  sed do eiusmod tempor inc',
+                    subtitle: 'Rozpocznij przygodę z squashem już od najmłodszych lat - specjalnie dostosowane treningi dla dzieci!',
                     icon: 'ph:baby-fill'
                 },
                 {
                     title: 'Dla dorosłych',
-                    subtitle: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor inc sed do eiusmod tempor inc.  sed do eiusmod tempor inc',
+                    subtitle: 'Zwiększ swoje umiejętności i zrób krok w kierunku squasha - treningi dla dorosłych na najwyższym poziomie.',
                     icon: 'mdi:account-tie'
                 },
                 {
-                    title: 'W parach',
-                    subtitle: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor inc sed do eiusmod tempor inc.  sed do eiusmod tempor inc',
-                    icon: 'material-symbols:group'
+                    title: 'Indywidualne',
+                    subtitle: 'Skup się na swoim rozwoju i dostosuj trening do własnych potrzeb - treningi indywidualne to idealne rozwiązanie dla tych, którzy chcą osiągnąć swój cel szybciej.',
+                    icon: 'material-symbols:person'
                 },
                 {
                     title: 'Grupowe',
-                    subtitle: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor inc sed do eiusmod tempor inc.  sed do eiusmod tempor inc',
+                    subtitle: 'Dołącz do grupy i baw się dobrze podczas treningu - treningi grupowe to nie tylko doskonała okazja do rozwoju, ale też do zawierania nowych znajomości.',
                     icon: 'material-symbols:groups-2-rounded'
                 },
                 {
-                    title: 'Indywidualne',
-                    subtitle: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor inc sed do eiusmod tempor inc.  sed do eiusmod tempor inc',
-                    icon: 'material-symbols:person'
-                }
+                    title: 'W parach',
+                    subtitle: 'Graj z partnerem i zmień swoją rutynę treningową treningi w parach to świetna zabawa i doskonały trening.',
+                    icon: 'material-symbols:group'
+                },
             ]
         }
     }

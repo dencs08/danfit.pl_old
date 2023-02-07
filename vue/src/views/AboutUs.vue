@@ -1,13 +1,32 @@
 <template>
-    <div class="container mt-24">
-        <h3>O nas</h3>
+    <div>
+        <div class="mt-16">
+            <section class="section-pb">
+                <WhoAreWe />
+            </section>
+            <div class="container">
+                <section class="section-pb">
+                    <WhyUs />
+                </section>
+                <section class="section-pb">
+                    <HowWeWork />
+                </section>
+                <section class="pb-14">
+                    <CTABookAnHour />
+                </section>
+            </div>
+        </div>
+        <Footer />
     </div>
 </template>
 <script lang="ts">
+import { WhoAreWe, WhyUs, HowWeWork, CTABookAnHour, Footer } from '../containers'
 export default {
-
+    components: {
+        WhoAreWe, WhyUs, HowWeWork, CTABookAnHour, Footer
+    }
 }
 </script>
-<style lang="">
-    
+<style lang="scss">
+
 </style>
