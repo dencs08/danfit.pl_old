@@ -41,21 +41,22 @@
                     <!-- Contact form -->
                     <div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
                         <h3 class="text-lg font-medium text-warm-gray-900">Napisz do nas</h3>
-                        <form action="#" method="POST" class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+                        <form @submit.prevent="submitForm" method="POST"
+                            class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
 
-                            <InputCustom label="Imie" type="firstname" name="firstname" placeholder="Jan"
-                                :required="true" />
-                            <InputCustom label="Nazwisko" type="surname" name="surname" placeholder="Kowalski"
-                                :optional="true" />
-                            <InputCustom label="Email" type="email" name="email" placeholder="twoj@email.com"
-                                :required="true" />
-                            <InputCustom label="Telefon" type="phone" name="phone" placeholder="123 123 123"
-                                :optional="true" />
-                            <InputCustom label="Temat" type="subject" name="subject" placeholder="Temat wiadomości"
-                                class="sm:col-span-2" :required="true" />
+                            <InputCustom v-model="email.name" label="Imie" type="firstname" name="firstname"
+                                placeholder="Jan" :required="true" />
+                            <InputCustom v-model="email.surname" label="Nazwisko" type="surname" name="surname"
+                                placeholder="Kowalski" :optional="true" />
+                            <InputCustom v-model="email.email" label="Email" type="email" name="email"
+                                placeholder="twoj@email.com" :required="true" />
+                            <InputCustom v-model="email.phone" label="Telefon" type="phone" name="phone"
+                                placeholder="123 123 123" :optional="true" />
+                            <InputCustom v-model="email.subject" label="Temat" type="subject" name="subject"
+                                placeholder="Temat wiadomości" class="sm:col-span-2" :required="true" />
 
-                            <TextAreaCustom :rows="4" name="message" label="Wiadomość" placeholder=". . ."
-                                :required="true" />
+                            <TextAreaCustom v-model="email.message" :rows="4" name="message" label="Wiadomość"
+                                placeholder=". . ." :required="true" />
 
                             <div class="sm:col-span-2 sm:flex sm:justify-end">
                                 <Button>Wyślij</Button>
@@ -81,6 +82,22 @@ export default {
 
     data() {
         return {
+            email: {
+                name: '',
+                surname: '',
+                email: '',
+                phone: '',
+                subject: '',
+                message: '',
+            }
+        }
+    },
+
+    methods: {
+        async submitForm() {
+            const email = { name: this.email.name, surname: this.email.surname, email: this.email, phone: this.email.phone, subject: this.email.subject, message: this.email.message };
+            console.log(email);
+            // await sendEmail(email);
 
         }
     }
