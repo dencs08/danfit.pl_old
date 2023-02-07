@@ -9,7 +9,7 @@
 
                     <div class="mt-6 mb-8 sm:mb-14 font-color-secondary">
                         <h2>
-                            Najlepsze treningi squasha w Zielonej Górze,
+                            Profesjonalne treningi squasha,
                             <span>
                                 <Link link="Calendar" :underline="true">zapisz się</Link>
                             </span>
