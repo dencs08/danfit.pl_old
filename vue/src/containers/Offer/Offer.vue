@@ -10,13 +10,13 @@
                     dla każdego - niezależnie od Twoich umiejętności czy wieku.
                 </p>
                 <div class="flex items-center mt-6">
-                    <router-link :to="{ name: 'Calendar' }">
-                        <Button class="w-full sm:w-auto">Zapisz się</Button>
+                    <router-link :to="{ name: 'Offer' }">
+                        <Button class="w-full sm:w-auto">Oferta</Button>
                     </router-link>
                 </div>
             </div>
             <div class="grid gap-2 sm:grid-cols-2">
-                <router-link :to="{ name: 'Calendar' }" v-for="feature in features">
+                <router-link :to="{ name: 'Offer' }" v-for="feature in features">
                     <div class="card rounded-xl py-5 px-0 sm:p-7 hover:bg-gray-800 transition-all duration-75">
                         <div class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
                             <Icon :icon="feature.icon" width="35px" class="text-primaryBlack" />
@@ -49,7 +49,7 @@ export default {
         return {
             features: [
                 {
-                    title: 'Dla juniorów',
+                    title: 'Dla dzieci',
                     subtitle: 'Lorem ipsum dolor sit amet, consectetur, sed do eiusmod tempor inc sed do eiusmod tempor inc.  sed do eiusmod tempor inc',
                     icon: 'ph:baby-fill'
                 },
