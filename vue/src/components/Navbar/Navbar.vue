@@ -1,10 +1,11 @@
 <template>
     <Popover class="fixed z-[999] bg-primaryWhite shadow-md">
         <div class="relative mx-auto max-w-[95%] sm:max-w-[98%] w-screen">
-            <div class="flex items-center justify-between min-h-[55px] lg:h-[9vh] lg:justify-start lg:space-x-10">
+            <div
+                class="flex items-center justify-between min-h-[55px] lg:h-[8.5vh] max-h-[80px] lg:justify-start lg:space-x-10">
                 <div class="flex justify-start lg:w-0 lg:flex-1">
                     <router-link to="/start" class="mr-10">
-                        <img :src="logo" class="min-w-[30px] lg:w-[2vw]" alt="danfit logo">
+                        <img :src="logo" class="min-w-[30px] lg:w-[1.75vw] max-w-[40px]" alt="danfit logo">
                     </router-link>
                 </div>
                 <div class="-my-2 -mr-2 lg:hidden">
@@ -15,7 +16,8 @@
                     </PopoverButton>
                 </div>
                 <PopoverGroup as="nav" class="hidden space-x-10 lg:flex">
-                    <Link v-for="link in mainMenu" :to="{ name: link.to }" :underline="false" :black="true">{{ link.name
+                    <Link v-for="link in mainMenu" :to="{ name: link.to }" :underline="false" :black="true">{{
+                        link.name
                     }}</Link>
                 </PopoverGroup>
                 <div class="hidden items-center justify-end lg:flex lg:flex-1 lg:w-0 space-x-4">
@@ -62,7 +64,8 @@
                     <div class="space-y-6 py-6 px-5">
                         <div class="grid grid-cols-2 gap-y-4 gap-x-8">
                             <router-link v-for="item in resources" :key="item.name" :to="{ name: item.to }"
-                                class="text-base font-medium text-gray-900 hover:text-gray-700">{{ item.name
+                                class="text-base font-medium text-gray-900 hover:text-gray-700">{{
+                                    item.name
                                 }}</router-link>
                         </div>
                         <div>
@@ -108,8 +111,8 @@ export default defineComponent({
             isMenuOpen: false,
             mainMenu: [
                 { name: 'Start', to: 'Start', icon: 'material-symbols:home' },
-                { name: 'Oferta', to: 'Start', icon: 'material-symbols:sports-tennis' },
-                { name: 'O nas', to: 'Start', icon: 'material-symbols:groups' },
+                { name: 'Oferta', to: 'Offer', icon: 'material-symbols:sports-tennis' },
+                { name: 'O nas', to: 'AboutUs', icon: 'material-symbols:groups' },
                 { name: 'Kontakt', to: 'Contact', icon: 'material-symbols:mail-rounded' },
                 { name: 'Rezerwacje', to: 'Calendar', icon: 'material-symbols:calendar-month' }
             ],
