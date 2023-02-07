@@ -33,15 +33,15 @@ const routes = [
             {
                 path: "/login",
                 name: "Login",
-                component: Login,
+                component: PageInProgress, //Login
             },
             {
                 path: "/rejestracja",
                 name: "Register",
-                component: Register,
+                component: PageInProgress, //Register
             },
             {
-                path: "/kontact",
+                path: "/kontakt",
                 name: "Contact",
                 component: Contact,
             },
@@ -158,5 +158,13 @@ const routes = [
 const router = createRouter({
     routes,
     history: createWebHistory(),
+
+    scrollBehavior(to, from, savedPosition) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve({ left: 0, top: 0 });
+            }, 250);
+        });
+    },
 });
 export default router;
