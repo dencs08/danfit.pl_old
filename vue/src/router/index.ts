@@ -19,6 +19,9 @@ import {
     Calendar,
     Booking,
     CoachTrainings,
+    Offer,
+    AboutUs,
+    PageInProgress,
 } from "../views";
 
 const routes = [
@@ -60,7 +63,17 @@ const routes = [
             {
                 path: "/kalendarz",
                 name: "Calendar",
-                component: Calendar,
+                component: PageInProgress, //Calendar
+            },
+            {
+                path: "/oferta",
+                name: "Offer",
+                component: Offer,
+            },
+            {
+                path: "/o-nas",
+                name: "AboutUs",
+                component: AboutUs,
             },
         ],
     },
