@@ -51,8 +51,8 @@
         <div class="container flex flex-col sm:flex-row items-center sm:justify-between">
             <span class="text-sm  sm:text-center text-gray-400">© 2022
                 <router-link to="/start" class="hover:underline">
-                    danfit
-                </router-link>. Wszelkie prawa zastrzeżone.
+                    danfit.
+                </router-link> Wszelkie prawa zastrzeżone.
             </span>
             <div class="flex mt-4 space-x-6 justify-center sm:mt-0">
                 <a href="https://www.facebook.com/danfitpl" target="_blank" rel="noopener"
@@ -79,8 +79,8 @@ export default {
         return {
             menu: [
                 { name: 'Start', to: 'Start' },
-                { name: 'Oferta', to: 'Start' },
-                { name: 'O nas', to: 'Start' },
+                { name: 'Oferta', to: 'Offer' },
+                { name: 'O nas', to: 'AboutUs' },
                 { name: 'Kontakt', to: 'Contact' },
                 { name: 'Zarezerwuj trening', to: 'Calendar' },
             ],
