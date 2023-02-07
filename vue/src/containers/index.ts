@@ -10,3 +10,11 @@ export { default as Footer } from "./Footer/Footer.vue";
 export { default as AccountHeader } from "./AccountHeader.vue";
 
 export { default as Calendar } from "./Calendar.vue";
+
+export { default as ForWho } from "./ForWho.vue";
+export { default as WeWorkWith } from "./WeWorkWith.vue";
+export { default as WhereWeWork } from "./WhereWeWork.vue";
+export { default as WhoAreWe } from "./WhoAreWe.vue";
+export { default as HowWeWork } from "./HowWeWork.vue";
+
+export { default as CTABookAnHour } from "./CTABookAnHour.vue";
