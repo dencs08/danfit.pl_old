@@ -26,6 +26,8 @@ span {
 }
 
 .underline {
+    text-decoration: underline;
+
     &:after {
         content: "";
         border-bottom: solid 1px;
