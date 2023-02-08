@@ -69,6 +69,7 @@
     </section>
 </template>
 <script lang="ts">
+import axios from 'axios';
 import { Icon } from '@iconify/vue';
 import { Link, Button, InputCustom, TextAreaCustom } from '../../components';
 export default {
@@ -95,10 +96,29 @@ export default {
 
     methods: {
         async submitForm() {
-            const email = { name: this.email.name, surname: this.email.surname, email: this.email, phone: this.email.phone, subject: this.email.subject, message: this.email.message };
+            const email = { name: this.email.name, surname: this.email.surname, email: this.email.email, phone: this.email.phone, subject: this.email.subject, message: this.email.message };
             console.log(email);
             // await sendEmail(email);
 
+            axios.post('http://localhost:8000/api/emailContactForm', {
+                name: email.name,
+                surname: email.surname,
+                email: email.email,
+                phone: email.phone,
+                subject: email.subject,
+                message: email.message,
+            })
+                .then(response => {
+                    console.log("good");
+                    console.log(response);
+                    // toast('Wiadomośc wysłana!', 'Sprawdź swoją skrzynkę po email z potwierdzeniem, do usłyszenia wkrótce! :-)')
+
+                })
+                .catch(error => {
+                    console.log("error");
+                    console.error(error);
+                    // toast('Ups! Coś poszło nie tak..', 'Spróbuj ponownie poźniej, lub skontaktuj się bezpośrednio na biuro@danfit.pl')
+                });
         }
     }
 }
