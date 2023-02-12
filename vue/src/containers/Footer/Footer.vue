@@ -6,16 +6,16 @@
                     <img src="../../assets/logos/danfit_logo_white.svg" class="mr-3 h-8" alt="danfit Logo" />
                 </router-link>
 
-                <div class="mt-8 ">
+                <div class="mt-8">
                     <p class="text-white">Zapisz się do naszego newstellera</p>
                     <p class="text-gray-500">(informacje o eventach np. turnieje)</p>
 
                     <div class="mt-4">
-                        <form action="#">
-                            <input type="text" id="email"
+                        <form @submit.prevent="subscribeToNewsletter" action="#">
+                            <input v-model="newsletterEmail" type="text" id="email"
                                 class="border text-sm rounded-full block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Email" required>
-                            <Button class="mt-2 float-right" size="xs">Zapisz</Button>
+                            <Button type="submit" class="mt-2 float-right" size="xs">Zapisz</Button>
                         </form>
                     </div>
                 </div>
@@ -70,6 +70,9 @@
 </template>
 <script lang="ts">
 import { Button } from '../../components';
+import { axiosClient } from '../../ts/axios';
+import { toast } from '../../ts/toast';
+
 export default {
     components: {
         Button
@@ -91,7 +94,31 @@ export default {
             privacy: [
                 { name: 'Polityka prywatności', to: 'Privacy' },
                 { name: 'Warunki korzystania', to: 'Terms' },
-            ]
+            ],
+
+            newsletterEmail: ''
+        }
+    },
+
+    methods: {
+        async subscribeToNewsletter(event: any) {
+            event.preventDefault();
+            axiosClient.post('/newsletter', {
+                email: this.newsletterEmail
+            })
+                .then(response => {
+                    console.log(response);
+                    toast('Dodaliśmy Cię do newslettera', 'Dziękujemy!', '')
+                    event.target.reset();
+                })
+                .catch(error => {
+                    console.error(error);
+                    toast('Ups! Coś poszło nie tak..', 'Spróbuj ponownie poźniej, lub skontaktuj się bezpośrednio na biuro@danfit.pl', 'warning')
+                });
+
+            // let test = axiosClient.get('/test')
+            // console.log(test);
+
         }
     }
 }
