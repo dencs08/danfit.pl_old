@@ -41,7 +41,7 @@
                     <!-- Contact form -->
                     <div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
                         <h3 class="text-lg font-medium text-warm-gray-900">Napisz do nas</h3>
-                        <form @submit.prevent="submitForm" method="POST"
+                        <form ref="contactForm" @submit.prevent="submitForm" action="#" method="POST"
                             class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
 
                             <InputCustom v-model="email.name" label="Imie" type="firstname" name="firstname"
@@ -59,7 +59,7 @@
                                 placeholder=". . ." :required="true" />
 
                             <div class="sm:col-span-2 sm:flex sm:justify-end">
-                                <Button>Wyślij</Button>
+                                <Button type="submit">Wyślij</Button>
                             </div>
                         </form>
                     </div>
@@ -69,9 +69,10 @@
     </section>
 </template>
 <script lang="ts">
-import axios from 'axios';
 import { Icon } from '@iconify/vue';
 import { Link, Button, InputCustom, TextAreaCustom } from '../../components';
+import { axiosClient } from '../../ts/axios'
+import { toast } from '../../ts/toast';
 export default {
     components: {
         Icon,
@@ -95,12 +96,13 @@ export default {
     },
 
     methods: {
-        async submitForm() {
+        async submitForm(event: any) {
+            event.preventDefault();
             const email = { name: this.email.name, surname: this.email.surname, email: this.email.email, phone: this.email.phone, subject: this.email.subject, message: this.email.message };
             console.log(email);
             // await sendEmail(email);
 
-            axios.post('http://localhost:8000/api/emailContactForm', {
+            axiosClient.post('/emailContactForm', {
                 name: email.name,
                 surname: email.surname,
                 email: email.email,
@@ -111,16 +113,16 @@ export default {
                 .then(response => {
                     console.log("good");
                     console.log(response);
-                    // toast('Wiadomośc wysłana!', 'Sprawdź swoją skrzynkę po email z potwierdzeniem, do usłyszenia wkrótce! :-)')
-
+                    toast('Wiadomośc wysłana!', 'Sprawdź swoją skrzynkę po email z potwierdzeniem, do usłyszenia wkrótce! :-)', '')
+                    event.target.reset();
                 })
                 .catch(error => {
                     console.log("error");
                     console.error(error);
-                    // toast('Ups! Coś poszło nie tak..', 'Spróbuj ponownie poźniej, lub skontaktuj się bezpośrednio na biuro@danfit.pl')
+                    toast('Ups! Coś poszło nie tak..', 'Spróbuj ponownie poźniej, lub skontaktuj się bezpośrednio na biuro@danfit.pl', 'warning')
                 });
         }
-    }
+    },
 }
 </script>
 <style lang="">
