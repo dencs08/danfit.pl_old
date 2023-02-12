@@ -1,6 +1,6 @@
 import toastr from "toastr";
 
-export function toast(title, message, option) {
+export function toast(title: any, message: any, option: any) {
     toastOptions();
 
     toastCall(title, message, option);
@@ -8,17 +8,16 @@ export function toast(title, message, option) {
 
 function toastOptions() {
     toastr.options = {
-        closeButton: false,
+        closeButton: true,
         debug: false,
         newestOnTop: false,
         progressBar: true,
-        positionClass: "toast-top-full-width",
+        positionClass: "toast-top-right",
         preventDuplicates: false,
-        onclick: null,
-        showDuration: "300",
-        hideDuration: "1000",
-        timeOut: "5000",
-        extendedTimeOut: "1000",
+        hideDuration: 1000,
+        showDuration: 300,
+        timeOut: 6000,
+        extendedTimeOut: 1000,
         showEasing: "swing",
         hideEasing: "linear",
         showMethod: "fadeIn",
@@ -26,7 +25,11 @@ function toastOptions() {
     };
 }
 
-function toastCall(title, message, option) {
+function toastCall(
+    title: string | undefined,
+    message: string | JQuery<HTMLElement>,
+    option: any
+) {
     switch (option) {
         case "success":
             toastr.success(message, title);
