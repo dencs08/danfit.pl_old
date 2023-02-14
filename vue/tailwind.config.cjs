@@ -8,10 +8,10 @@ module.exports = {
   corePlugins: {
     container: false
   },
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  variants: {
+    container: [],
+  },
+  content: ['./src/**/*.{html,js,ts,vue}'],
   theme: {
     extend: {
       colors: {
