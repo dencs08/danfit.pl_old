@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <div class="relative py-10">
             <div class="lg:mx-auto lg:grid lg:grid-cols-2 lg:items-start lg:gap-24 lg:px-8">
                 <div class="relative sm:py-16 lg:py-0">
