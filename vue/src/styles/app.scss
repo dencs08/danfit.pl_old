@@ -1,10 +1,11 @@
+@import "./utilities.scss";
+@import "./variables.scss";
+@import "toastr";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import "./variables.scss";
-@import "./utilities.scss";
-@import "toastr";
 html,
 body {
     margin: 0;
