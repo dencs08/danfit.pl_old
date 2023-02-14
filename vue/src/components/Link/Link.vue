@@ -1,6 +1,6 @@
 <template>
     <router-link :to="{ name: link }">
-        <span class="text-secondaryColor" :class="{ underline: underline, 'text-primaryBlack': black }">
+        <span class="" :class="{ underline: underline, 'text-primaryBlack': black, 'text-secondaryColor': !black }">
             <slot></slot>
         </span>
     </router-link>
