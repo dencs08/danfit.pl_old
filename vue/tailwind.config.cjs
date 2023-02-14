@@ -1,18 +1,23 @@
-// import('tailwindcss').Config;
-// import('tailwindcss/forms');
+/** @type {import('tailwindcss').Config} */
 
 module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
   ],
   corePlugins: {
-    container: false
-  },
-  variants: {
-    container: [],
+    // container: false
   },
   content: ['./src/**/*.{html,js,ts,vue}'],
   theme: {
+    // container: {
+    //   maxWidth: {
+    //     DEFAULT: '90%',
+    //     sm: '90%',
+    //     lg: '90%',
+    //     xl: '90%',
+    //     '2xl': '90%',
+    //   },
+    // },
     extend: {
       colors: {
         'primaryWhite': '#F7F7F7',
