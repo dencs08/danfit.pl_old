@@ -1,0 +1,53 @@
+@import "./utilities.scss";
+@import "./variables.scss";
+@import "toastr";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $white;
+
+    color: $black;
+    font-family: $font-family-secondary;
+
+    overflow-x: hidden;
+}
+
+h1 {
+    font-family: $font-family-secondary;
+    font-size: clamp(1.3rem, 7.5vw, 50rem);
+    line-height: clamp(1.3rem, 8.5vw, 50rem);
+    font-weight: 700;
+}
+
+h2 {
+    font-family: $font-family-secondary;
+    font-size: clamp(1.1rem, 2.6vw, 10rem);
+}
+
+h3 {
+    font-family: $font-family-secondary;
+    font-size: clamp(1.75rem, 3.5vw, 10rem);
+
+    font-weight: 700;
+}
+
+h4 {
+    font-family: $font-family-secondary;
+    font-size: clamp(1.75rem, 1.35vw, 10rem);
+}
+
+h6 {
+    font-family: $font-family-secondary;
+    font-size: clamp(1.75rem, 1.2vw, 10rem);
+
+    font-weight: 500;
+}
