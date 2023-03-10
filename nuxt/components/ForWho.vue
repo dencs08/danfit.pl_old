@@ -6,7 +6,7 @@
                 <div class="relative flex-1 px-6 pt-16 pb-8 md:px-8">
                     <div
                         class="absolute top-0 inline-block -translate-y-1/2 transform rounded-xl bg-blue-600 p-4 shadow-lg">
-                        <Icon :icon="link.icon" class="h-7 w-7 text-white" aria-hidden="true" />
+                        <Icon :name="link.icon" class="h-7 w-7 text-white-primary" aria-hidden="true" />
                     </div>
                     <h3 class="text-xl font-medium text-gray-900">{{ link.name }}</h3>
                     <p class="mt-4 text-base text-gray-500">{{ link.description }}</p>
@@ -22,7 +22,6 @@
     </section>
 </template>
 <script lang="ts">
-import { Icon } from '@iconify/vue'
 export default {
     data() {
         return {

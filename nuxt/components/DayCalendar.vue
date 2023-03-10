@@ -16,7 +16,7 @@
                     <Button size="xs" @click="showCalendar">
                         <div class="flex justify-center space-x-2">
                             <span>31.12.2022</span>
-                            <Icon icon="material-symbols:calendar-month" width="20px" class="inline" />
+                            <Icon name="material-symbols:calendar-month" width="20px" class="inline" />
                         </div>
                     </Button>
                     <div>
@@ -41,7 +41,7 @@
                     <button type="button"
                         class="flex items-center justify-center rounded-l-md border border-r-0 border-gray-300 bg-white py-2 pl-3 pr-4 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50">
                         <span class="sr-only">Poprzedni dzień</span>
-                        <Icon icon="material-symbols:arrow-back-ios-new" width="15px" class="my-1" />
+                        <Icon name="material-symbols:arrow-back-ios-new" width="15px" class="my-1" />
                     </button>
                     <button type="button"
                         class="hidden border-t border-b border-gray-300 bg-white px-3.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:relative md:block">Dzisaj</button>
@@ -49,7 +49,7 @@
                     <button type="button"
                         class="flex items-center justify-center rounded-r-md border border-l-0 border-gray-300 bg-white py-2 pl-4 pr-3 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:px-2 md:hover:bg-gray-50">
                         <span class="sr-only">Następny dzień</span>
-                        <Icon icon="material-symbols:arrow-forward-ios-rounded" width="15px" class="my-1" />
+                        <Icon name="material-symbols:arrow-forward-ios-rounded" width="15px" class="my-1" />
                     </button>
                 </div>
             </div>
@@ -107,20 +107,20 @@
                             </ol>
                             <div>
                                 <div class="flex items-center space-x-1 text-sm">
-                                    <Icon icon="material-symbols:search-rounded" width="15px" />
+                                    <Icon name="material-symbols:search-rounded" width="15px" />
                                     <span>{{ hour.lookingFor }}</span>
                                 </div>
                             </div>
                         </div>
                         <div v-if="hour.myBooked" class="text-left font-medium h-[75%] text-white flex">
                             <p class="text-xs">Jesteś zapisany!</p>
-                            <Icon icon="material-symbols:check-circle" width="15px" class="mb-1 min-w-[10px]" />
+                            <Icon name="material-symbols:check-circle" width="15px" class="mb-1 min-w-[10px]" />
                         </div>
                         <div v-if="hour.location && hour.myBooked || hour.location && hour.lookingFor"
                             class="h-[25%] text-xs"
                             :class="[hour.myBooked ? 'text-white text-right' : 'flex justify-end items-end']">
                             <span>{{ hour.location }}</span>
-                            <Icon icon="ci:location" width="15px" class="inline" />
+                            <Icon name="ci:location" width="15px" class="inline" />
                         </div>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                         <span class="sr-only">{{ hour.people.length }} people</span>
                         <div v-if="!hour.myBooked && hour.people.length > 0 && hour.lookingFor" class="h-[75%]">
                             <div class="flex items-center space-x-1">
-                                <Icon icon="material-symbols:search-rounded" width="15px" />
+                                <Icon name="material-symbols:search-rounded" width="15px" />
                                 <span>{{ hour.lookingFor }}</span>
                             </div>
                             <span class="-mx-0.5 flex flex-wrap-reverse xl:h-full mt-2">
@@ -145,13 +145,13 @@
                             </span>
                         </div>
                         <div v-if="hour.myBooked" class="grid place-content-center h-full w-full text-center font-medium">
-                            <Icon icon="material-symbols:check-circle" width="15px" class="text-white" />
+                            <Icon name="material-symbols:check-circle" width="15px" class="text-white-primary" />
                         </div>
                         <div v-if="hour.location && hour.myBooked || hour.location && hour.lookingFor"
                             class="h-[25%] text-xs flex justify-end items-end" :class="[hour.myBooked ? 'text-white' : '']">
 
                             <span>{{ hour.location }}</span>
-                            <Icon icon="ci:location" width="15px" class="inline" />
+                            <Icon name="ci:location" width="15px" class="inline" />
                         </div>
                     </button>
                 </div>
@@ -163,8 +163,6 @@
 </template>
 
 <script lang='ts'>
-import { Icon } from '@iconify/vue';
-
 function getFieldColor(color: String): string {
     switch (color) {
         case 'Booked':

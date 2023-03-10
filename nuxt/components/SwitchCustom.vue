@@ -7,22 +7,21 @@
             <span
                 :class="[enabled ? 'opacity-0 ease-out duration-100' : 'opacity-100 ease-in duration-200', 'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity']"
                 aria-hidden="true">
-                <Icon v-if="icons" icon="ic:round-close" class="text-gray-500" width="13px" />
+                <Icon v-if="icons" name="ic:round-close" class="text-gray-500" width="13px" />
             </span>
             <span
                 :class="[enabled ? 'opacity-100 ease-in duration-200' : 'opacity-0 ease-out duration-100', 'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity']"
                 aria-hidden="true">
-                <Icon v-if="icons" icon="ic:round-check" class="text-gray-500" width="13px" />
+                <Icon v-if="icons" name="ic:round-check" class="text-gray-500" width="13px" />
             </span>
         </span>
     </Switch>
 </template>
 <script lang="ts">
 import { Switch } from '@headlessui/vue'
-import { Icon } from '@iconify/vue'
 export default {
     components: {
-        Switch, Icon
+        Switch
     },
     props: {
         state: Boolean,

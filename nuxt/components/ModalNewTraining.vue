@@ -6,7 +6,7 @@
                 {{ hour?.status === 'Free' ? 'Wolny termin' : 'Zajęty!' }}
             </button>
         </div>
-        <Icon @click="$emit('toggleModal')" icon="ic:twotone-close" width="15px" class="cursor-pointer" />
+        <Icon @click="$emit('toggleModal')" name="ic:twotone-close" width="15px" class="cursor-pointer" />
     </div>
 
     <div v-if="currentContent == 0" class="divide-y">
@@ -100,28 +100,28 @@
         </div>
         <div class="sm:text-left px-5 py-4">
             <h5 class="leading-[24px] text-md font-medium mb-1">
-                <Icon icon="ic:baseline-info" width="20px" class="inline" />
+                <Icon name="ic:baseline-info" width="20px" class="inline" />
                 Informacje o treningu
             </h5>
             <div class="text-sm text-gray-500 ml-6 space-y-1">
                 <p>
-                    <Icon icon="ic:sharp-groups" class="inline mr-2" />
+                    <Icon name="ic:sharp-groups" class="inline mr-2" />
                     <span>{{ playerCount }} </span>
                 </p>
                 <p>
-                    <Icon icon="ic:outline-hourglass-full" class="inline mr-2" />
+                    <Icon name="ic:outline-hourglass-full" class="inline mr-2" />
                     <span>{{ hour?.time }}</span>
                 </p>
                 <p>
-                    <Icon icon="ic:baseline-calendar-month" class="inline mr-2" />
+                    <Icon name="ic:baseline-calendar-month" class="inline mr-2" />
                     <span>{{ hour?.date }}</span>
                 </p>
                 <p>
-                    <Icon icon="ic:baseline-location-on" class="inline mr-2" />
+                    <Icon name="ic:baseline-location-on" class="inline mr-2" />
                     <span>{{ hour?.location }}</span>
                 </p>
                 <p>
-                    <Icon icon="ic:round-person-add" class="inline mr-2" />
+                    <Icon name="ic:round-person-add" class="inline mr-2" />
                     <span>{{ hour?.lookingFor }}</span>
                 </p>
             </div>
@@ -145,12 +145,10 @@
 
 <script lang="ts">
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { Button, SwitchCustom, Tooltip, SelectMenu, InputCustom } from '../components';
-import { Icon } from '@iconify/vue';
 
 export default {
     components: {
-        Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, SwitchCustom, Button, Icon, Tooltip, SelectMenu, InputCustom
+        Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot
     },
     props: {
         coach: Object,

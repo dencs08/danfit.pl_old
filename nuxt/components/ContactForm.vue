@@ -18,12 +18,12 @@
                         <dl class="mt-8 space-y-6">
                             <dt><span class="sr-only">Phone number</span></dt>
                             <dd class="flex">
-                                <Icon icon="ic:round-phone-enabled" width="25px" />
+                                <Icon name="ic:round-phone-enabled" width="25px" />
                                 <span class="ml-3">+48 882 031 130</span>
                             </dd>
                             <dt><span class="sr-only">Email</span></dt>
                             <dd class="flex">
-                                <Icon icon="ic:baseline-mail" width="25px" />
+                                <Icon name="ic:baseline-mail" width="25px" />
                                 <span class="ml-3">biuro@danfit.pl</span>
                             </dd>
                         </dl>
@@ -32,7 +32,7 @@
                                 <a class="text-teal-200 hover:text-teal-100" href="https://www.facebook.com/danfitpl"
                                     target="_blank">
                                     <span class="sr-only">Facebook</span>
-                                    <Icon icon="ic:baseline-facebook" width="25px" />
+                                    <Icon name="ic:baseline-facebook" width="25px" />
                                 </a>
                             </li>
                         </ul>
@@ -69,7 +69,6 @@
     </section>
 </template>
 <script lang="ts">
-import { Icon } from '@iconify/vue';
 import { axiosClient } from '../ts/axios'
 import { toast } from '../ts/toast';
 export default {

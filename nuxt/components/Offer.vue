@@ -1,6 +1,6 @@
 <template>
     <section>
-        <div class="container flex flex-col lg:flex-row text-primaryWhite">
+        <div class="container flex flex-col lg:flex-row text-white-primary">
             <div class="sm:pr-16 mx-auto mb-10 flex-1 md:min-w-[33vw]">
                 <h5 class="mb-6 font-extrabold">
                     Treningi squasha dla wszystkich, w każdym wieku!
@@ -19,13 +19,13 @@
                 <router-link :to="{ name: 'Offer' }" v-for="feature in features">
                     <div class="card rounded-xl py-5 px-0 sm:p-7 hover:bg-gray-800 transition-all duration-75">
                         <div class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
-                            <Icon :icon="feature.icon" width="35px" class="text-primaryBlack" />
+                            <Icon :name="feature.icon" width="35px" class="text-black-primary" />
                         </div>
                         <h6 class="mb-2 font-semibold leading-5 text-gray-200">{{ feature.title }}</h6>
                         <p class="text-gray-400">
                             {{ feature.subtitle }}
                             <span>
-                                <Icon icon="ic:twotone-arrow-right-alt" width="25px" class="inline text-tertiaryColor" />
+                                <Icon name="ic:twotone-arrow-right-alt" width="25px" class="inline text-color-tertiary" />
                             </span>
                         </p>
                     </div>
@@ -36,7 +36,6 @@
     </section>
 </template>
 <script lang="ts">
-import { Icon } from '@iconify/vue';
 export default {
     data() {
         return {

@@ -6,7 +6,7 @@
                 <div class="flex flex-wrap items-center justify-between">
                     <div class="flex w-0 flex-1 items-center">
                         <span class="flex">
-                            <Icon icon="ph:cookie-fill" width="35px" class="text-tertiaryColor" />
+                            <Icon name="ph:cookie-fill" width="35px" class="text-color-tertiary" />
                         </span>
                         <p class="ml-3 font-medium text-white">
                             <span class="inline">Ta strona wykorzystuje pliki cookies, korzystając ze strony akceptujesz
@@ -19,7 +19,7 @@
                         <button type="button" @click="toggleBanner"
                             class="-mr-1 flex rounded-md p-2 hover:bg-gray-700 duration-75 transition-all focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2">
                             <span class="sr-only">Dismiss</span>
-                            <Icon icon="carbon:checkmark" class="text-primaryWhite" />
+                            <Icon name="carbon:checkmark" class="text-white-primary" />
                         </button>
                     </div>
                 </div>
@@ -29,8 +29,6 @@
 </template>
 
 <script lang="ts">
-import { Icon } from '@iconify/vue';
-
 export default {
     data() {
         return {

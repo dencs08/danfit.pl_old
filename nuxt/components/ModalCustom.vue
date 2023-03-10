@@ -34,8 +34,6 @@
 </template>
 <script lang="ts">
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { Button, SwitchCustom, Tooltip, ModalEditTraining, ModalNewTraining, ModalJoinTraining } from '../components';
-import { Icon } from '@iconify/vue';
 
 function setAgePreference(age: String): string {
     switch (age) {
@@ -82,7 +80,7 @@ function setSizePreference(size: Number): string {
 
 export default {
     components: {
-        Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, SwitchCustom, Button, Icon, Tooltip, ModalEditTraining, ModalNewTraining, ModalJoinTraining
+        Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot,
     },
 
     data() {

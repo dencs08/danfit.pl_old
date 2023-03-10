@@ -18,7 +18,7 @@
                 </button>
             </Tooltip>
         </div>
-        <Icon @click="$emit('toggleModal')" icon="ic:twotone-close" width="15px" class="cursor-pointer" />
+        <Icon @click="$emit('toggleModal')" name="ic:twotone-close" width="15px" class="cursor-pointer" />
     </div>
 
     <div class="bg-white px-5 py-4">
@@ -43,16 +43,16 @@
         <div class="sm:flex sm:items-start">
             <div class="sm:text-left">
                 <h5 class="leading-[24px] text-md font-medium mb-1">
-                    <Icon icon="ic:baseline-person" width="20px" class="inline" />
+                    <Icon name="ic:baseline-person" width="20px" class="inline" />
                     {{ coach?.name }}
                 </h5>
                 <div class="text-sm text-gray-500 ml-6 space-y-1">
                     <p>
-                        <Icon icon="ic:baseline-phone" class="inline" />
+                        <Icon name="ic:baseline-phone" class="inline" />
                         {{ coach?.phone }}
                     </p>
                     <p>
-                        <Icon icon="ic:baseline-mail" class="inline" />
+                        <Icon name="ic:baseline-mail" class="inline" />
                         {{ coach?.email }}
                     </p>
                 </div>
@@ -64,24 +64,24 @@
         <div class="sm:flex sm:items-start justify-between">
             <div class="sm:text-left">
                 <h5 class="leading-[24px] text-md font-medium mb-1">
-                    <Icon icon="ic:baseline-info" width="20px" class="inline" />
+                    <Icon name="ic:baseline-info" width="20px" class="inline" />
                     Informacje o treningu
                 </h5>
                 <div class="text-sm text-gray-500 ml-6 space-y-1">
                     <p>
-                        <Icon icon="ic:sharp-groups" class="inline mr-2" />
+                        <Icon name="ic:sharp-groups" class="inline mr-2" />
                         <span>{{ playerCount }} </span>
                     </p>
                     <p>
-                        <Icon icon="ic:outline-hourglass-full" class="inline mr-2" />
+                        <Icon name="ic:outline-hourglass-full" class="inline mr-2" />
                         <span>{{ hour?.time }}</span>
                     </p>
                     <p>
-                        <Icon icon="ic:baseline-calendar-month" class="inline mr-2" />
+                        <Icon name="ic:baseline-calendar-month" class="inline mr-2" />
                         <span>{{ hour?.date }}</span>
                     </p>
                     <p>
-                        <Icon icon="ic:baseline-location-on" class="inline mr-2" />
+                        <Icon name="ic:baseline-location-on" class="inline mr-2" />
                         <span>{{ hour?.location }}</span>
                     </p>
                 </div>
@@ -97,12 +97,9 @@
 </template>
 <script lang="ts">
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { Button, SwitchCustom, Tooltip } from '../components';
-import { Icon } from '@iconify/vue';
-
 export default {
     components: {
-        Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot, SwitchCustom, Button, Icon, Tooltip
+        Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot
     },
     props: {
         coach: Object,

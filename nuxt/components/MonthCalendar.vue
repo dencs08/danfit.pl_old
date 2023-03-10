@@ -6,13 +6,13 @@
                     <button type="button"
                         class="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500">
                         <span class="sr-only">Poprzedni miesiąc</span>
-                        <Icon icon="material-symbols:arrow-back-ios-new-rounded" width="15px" />
+                        <Icon name="material-symbols:arrow-back-ios-new-rounded" width="15px" />
                     </button>
                     <div class="flex-auto font-semibold">Styczeń</div>
                     <button type="button"
                         class="-m-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500">
                         <span class="sr-only">Następny miesiąc</span>
-                        <Icon icon="material-symbols:arrow-forward-ios-rounded" width="15px" />
+                        <Icon name="material-symbols:arrow-forward-ios-rounded" width="15px" />
                     </button>
                 </div>
                 <div class="mt-3 grid grid-cols-7 text-xs leading-6 text-gray-500">
@@ -53,7 +53,6 @@
     </div>
 </template>
 <script lang="ts">
-// import { Icon } from '@iconify/vue';
 export default {
     data() {
         return {

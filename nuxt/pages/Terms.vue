@@ -25,13 +25,7 @@
     </main>
 </template>
 <script lang="ts">
-import { TextGradient } from '../components';
-import { Footer } from '../containers';
 export default {
-    components: {
-        TextGradient,
-        Footer
-    },
     data() {
         return {
             name: 'danfit',

@@ -6,7 +6,7 @@
                 class="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 text-xs sm:text-sm">
                 <span class="block truncate">{{ selected.name }}</span>
                 <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                    <Icon icon="ic:round-keyboard-arrow-up" class="h-5 w-5 text-gray-400" aria-hidden="true" />
+                    <Icon name="ic:round-keyboard-arrow-up" class="h-5 w-5 text-gray-400" aria-hidden="true" />
                 </span>
             </ListboxButton>
 
@@ -23,7 +23,7 @@
 
                             <span v-if="selected"
                                 :class="[active ? 'text-white' : 'text-emerald-500', 'absolute inset-y-0 right-0 flex items-center pr-4']">
-                                <Icon icon="ic:round-check" class="h-5 w-5" aria-hidden="true" />
+                                <Icon name="ic:round-check" class="h-5 w-5" aria-hidden="true" />
                             </span>
                         </li>
                     </ListboxOption>
@@ -34,14 +34,13 @@
 </template >
 <script lang="ts">
 import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue';
-// import { Icon } from "@iconify/vue";
 interface City {
     id: number;
     name: string;
 }
 export default {
     components: {
-        Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions, Icon
+        Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions
     },
     props: {
         label: String,

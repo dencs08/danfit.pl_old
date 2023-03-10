@@ -12,7 +12,7 @@
                     <PopoverButton
                         class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500">
                         <span class="sr-only">Open menu</span>
-                        <Icon icon="radix-icons:hamburger-menu" />
+                        <Icon name="radix-icons:hamburger-menu" />
                     </PopoverButton>
                 </div>
                 <PopoverGroup as="nav" class="hidden space-x-10 lg:flex">
@@ -48,14 +48,14 @@
                                 <PopoverButton
                                     class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                     <span class="sr-only">Close menu</span>
-                                    <Icon icon="mingcute:close-line" width="20px" class="inline" />
+                                    <Icon name="mingcute:close-line" width="20px" class="inline" />
                                 </PopoverButton>
                             </div>
                         </div>
                         <div class="mt-6">
                             <nav class="grid gap-y-6">
                                 <Link v-for="link in mainMenu" :to="{ name: link.to }" :underline="false" :black="true">
-                                <Icon :icon="link.icon" width="20px" class="inline" />
+                                <Icon :name="link.icon" width="20px" class="inline" />
                                 <span class="ml-3 text-base font-medium text-gray-900">{{ link.name }}</span>
                                 </Link>
                             </nav>
@@ -88,8 +88,6 @@
 </template>
 
 <script lang="ts">
-// import { Icon } from '@iconify/vue';
-
 import logo from '../assets/img/logos/danfit_logotype_black.svg';
 
 import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
