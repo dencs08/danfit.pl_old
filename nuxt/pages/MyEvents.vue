@@ -10,6 +10,10 @@
     </div>
 </template>
 <script lang="ts">
+definePageMeta({
+    layout: 'account'
+})
+
 export default {
     data() {
         return {

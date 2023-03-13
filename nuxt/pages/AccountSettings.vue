@@ -88,15 +88,18 @@ import {
     SwitchLabel,
 } from '@headlessui/vue'
 
-import { Button, Link, InputCustom, SwitchCustom } from '../../components';
+definePageMeta({
+    layout: 'account'
+})
 
 export default {
+
+
     components: {
         Switch,
         SwitchDescription,
         SwitchGroup,
         SwitchLabel,
-        Button, Link, InputCustom, SwitchCustom
     },
 
     data() {

@@ -7,12 +7,9 @@
     </div>
 </template>
 <script lang="ts">
-import { DayCalendar } from '../../components';
-export default {
-    components: {
-        DayCalendar
-    }
-}
+definePageMeta({
+    layout: 'account'
+})
 </script>
 <style lang="">
     

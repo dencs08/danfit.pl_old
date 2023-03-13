@@ -2,7 +2,8 @@
     <section class="h-screen">
         <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div class="sm:mx-auto sm:w-full sm:max-w-md">
-                <img class="mx-auto h-8 w-auto" src="../assets/logos/danfit_blue_logo_full_color.svg" alt="danfit logo" />
+                <img class="mx-auto h-8 w-auto" src="../assets/img/logos/danfit_blue_logo_full_color.svg"
+                    alt="danfit logo" />
                 <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Zarejestruj nowe konto
                 </h2>
             </div>
@@ -15,9 +16,9 @@
                         <InputCustom type="password-repeat" name="password-repeat" label="Powtórz hasło" />
 
                         <div>
-                            <router-link :to="{ name: 'AccountSettings' }">
+                            <NuxtLink :to="{ name: 'AccountSettings' }">
                                 <Button type="submit" class="btn-xs w-full">Zarejestruj</Button>
-                            </router-link>
+                            </NuxtLink>
                         </div>
                     </form>
 
@@ -49,10 +50,10 @@
                     </div>
                     <p class="text-gray-500 text-center text-xs mt-4">
                         Klikając "zarejestruj się", zgadzasz się z naszymi
-                        <Link link="Terms">warunkami korzystamia</Link>,
-                        <Link link="Privacy">polityką prywatności</Link>
+                        <LinkCustom link="Terms">warunkami korzystania</LinkCustom>,
+                        <LinkCustom link="Privacy">polityką prywatności</LinkCustom>
                         i
-                        <Link link="Privacy">polityką ciasteczek</Link>.
+                        <LinkCustom link="Privacy">polityką ciasteczek</LinkCustom>.
                     </p>
                 </div>
             </div>

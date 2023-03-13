@@ -25,21 +25,6 @@
 </template>
   
 <script lang="ts">
-import { Button, Link, InputCustom, Navbar, AccountSidebar } from '../components';
-import { AccountHeader } from '../containers';
-
-export default {
-    components: {
-        AccountHeader,
-        Button,
-        Link,
-        InputCustom,
-        Navbar,
-        AccountSidebar
-    },
-}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

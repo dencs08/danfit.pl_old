@@ -9,13 +9,7 @@
     </div>
 </template>
 <script lang="ts">
-import { TextGradient, Link } from '../components'
-export default {
-    components: {
-        TextGradient,
-        Link
-    }
-}
+
 </script>
 <style lang="">
     
