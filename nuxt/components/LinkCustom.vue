@@ -1,7 +1,9 @@
 <template>
-    <span class="" :class="{ underline: underline, 'text-black-primary': black, 'text-color-secondary': !black }">
-        <slot></slot>
-    </span>
+    <NuxtLink :to="link">
+        <span class="" :class="{ underline: underline, 'text-black-primary': black, 'text-color-secondary': !black }">
+            <slot></slot>
+        </span>
+    </NuxtLink>
 </template>
 <script lang="ts">
 export default {

@@ -2,9 +2,9 @@
     <Modal ref="Modal" />
 
     <div class="h-10 space-x-4 flex justify-end items-center">
-        <router-link :to="{ name: 'MyTrainings' }">
+        <NuxtLink :to="{ name: 'MyTrainings' }">
             <Button size="xs" class="hidden sm:block mb-4">Wyświetl moje treningi</Button>
-        </router-link>
+        </NuxtLink>
     </div>
 
     <div class="lg:flex lg:h-full lg:flex-col">

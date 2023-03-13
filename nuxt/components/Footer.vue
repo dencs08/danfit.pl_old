@@ -2,9 +2,9 @@
     <footer class="pt-14 pb-8 bg-gray-900">
         <div class="container md:flex md:justify-between md:space-x-10">
             <div class="mb-24 md:mb-0">
-                <router-link to="/start" class="flex items-center">
+                <NuxtLink to="/start" class="flex items-center">
                     <img src="../assets/img/danfit_logo_white.svg" class="mr-3 h-8" alt="danfit Logo" />
-                </router-link>
+                </NuxtLink>
 
                 <div class="mt-8">
                     <p class="text-white">Zapisz się do naszego newstellera</p>
@@ -25,7 +25,7 @@
                     <h2 class="mb-6 text-sm font-semibold uppercase text-white">Menu</h2>
                     <ul class="text-gray-400 space-y-4">
                         <li v-for="link in menu">
-                            <router-link :to="{ name: link.to }" class="hover:underline">{{ link.name }}</router-link>
+                            <NuxtLink :to="{ name: link.to }" class="hover:underline">{{ link.name }}</NuxtLink>
                         </li>
                     </ul>
                 </div>
@@ -41,7 +41,7 @@
                     <h2 class="mb-6 text-sm font-semibold uppercase text-white">O Stronie</h2>
                     <ul class="text-gray-400 space-y-4">
                         <li v-for="link in privacy">
-                            <router-link :to="{ name: link.to }" class="hover:underline">{{ link.name }}</router-link>
+                            <NuxtLink :to="{ name: link.to }" class="hover:underline">{{ link.name }}</NuxtLink>
                         </li>
                     </ul>
                 </div>
@@ -50,9 +50,9 @@
         <hr class="container my-6  sm:mx-auto border-gray-700 lg:my-8" />
         <div class="container flex flex-col sm:flex-row items-center sm:justify-between">
             <span class="text-sm  sm:text-center text-gray-400">© 2022
-                <router-link to="/start" class="hover:underline">
+                <NuxtLink to="/start" class="hover:underline">
                     danfit.
-                </router-link> Wszelkie prawa zastrzeżone.
+                </NuxtLink> Wszelkie prawa zastrzeżone.
             </span>
             <div class="flex mt-4 space-x-6 justify-center sm:mt-0">
                 <a href="https://www.facebook.com/danfitpl" target="_blank" rel="noopener"

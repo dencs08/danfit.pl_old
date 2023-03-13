@@ -1,3 +1,4 @@
+
 <template>
     <div class="container">
         <div class="relative py-10">
@@ -19,13 +20,13 @@
                     <div class="relative mx-auto max-w-md px-6 sm:max-w-3xl lg:max-w-none lg:px-0 lg:py-20">
                         <!-- Testimonial card-->
                         <div class="relative overflow-hidden rounded-2xl pt-64 pb-10 shadow-xl">
-                            <img class="absolute inset-0 h-full w-full object-cover" src="../assets/ceo_photo.jpg"
+                            <img class="absolute inset-0 h-full w-full object-cover" src="../assets/img/ceo_photo.jpg"
                                 alt="" />
                             <div class="absolute inset-0 bg-cyan-500 mix-blend-multiply" />
                             <div class="absolute inset-0 bg-gradient-to-t from-emerald-600 via-cyan-600 opacity-70" />
                             <div class="relative px-8">
                                 <div>
-                                    <img class="h-7" src="../assets/logos/danfit_logo_white.svg" alt="danfit" />
+                                    <img class="h-7" src="../assets/img/logos/danfit_logo_white.svg" alt="danfit" />
                                 </div>
                                 <blockquote class="mt-8">
                                     <div class="relative text-lg font-medium text-white md:flex-grow">
@@ -77,10 +78,10 @@
                             </div>
                         </dl>
                         <div class="mt-10">
-                            <router-link :to="{ name: 'Contact' }" class="text-base font-medium text-indigo-600">
+                            <NuxtLink :to="{ name: 'Contact' }" class="text-base font-medium text-indigo-600">
                                 Napisz do nas o współpracę
                                 <span aria-hidden="true"> &rarr;</span>
-                            </router-link>
+                            </NuxtLink>
                         </div>
                     </div>
                 </div>

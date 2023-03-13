@@ -12,9 +12,9 @@
                     </p>
                 </div>
                 <div class="flex items-center space-x-6">
-                    <router-link :to="{ name: 'Calendar' }">
+                    <NuxtLink :to="{ name: 'Calendar' }">
                         <Button>Zarezerwuj trening</Button>
-                    </router-link>
+                    </NuxtLink>
                     <Link class="hidden xs:block" link="Contact">Napisz do nas</Link>
                 </div>
             </div>

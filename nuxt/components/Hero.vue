@@ -17,9 +17,9 @@
                         </h2>
                     </div>
 
-                    <router-link :to="{ name: 'Calendar' }">
+                    <NuxtLink :to="{ name: 'Calendar' }">
                         <Button class="w-full sm:w-auto btn-lg btn-primary">Zarezerwuj trening</Button>
-                    </router-link>
+                    </NuxtLink>
                 </div>
             </div>
         </div>

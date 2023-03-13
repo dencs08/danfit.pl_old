@@ -21,9 +21,9 @@
                         </p>
                     </div>
                 </div>
-                <router-link :to="{ name: 'Calendar' }">
+                <NuxtLink :to="{ name: 'Calendar' }">
                     <Button class="w-full xs:w-auto">Kalendarz zajeć</Button>
-                </router-link>
+                </NuxtLink>
             </div>
             <img class="absolute min-w-[700px] w-[100vw] lg:min-w-[750px] xl:min-w-[850px] 2xl:min-w-[1000px] lg:w-[57%] max-w-[1150px] right-[-65%] md:right-[-45%] lg:right-[3%] top-[40%] lg:top-[50%] z-[-1] translate-y-[-50%]"
                 src="../assets/img/illustrations/girl_1.png" alt="" />
