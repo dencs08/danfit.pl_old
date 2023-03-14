@@ -10,15 +10,6 @@
 </template>
 
 <script lang="ts">
-
-export default {
-    data() {
-        return {
-            // racket: racket,
-            // ball: ball
-        }
-    }
-}
 </script>
 
 <style lang="scss">
