@@ -4,12 +4,12 @@
             <div class="flex flex-shrink-0 justify-center">
                 <NuxtLink to="/" class="inline-flex">
                     <span class="sr-only">danfit</span>
-                    <img class="h-8 w-auto" src="../assets/logos/danfit_blue_logo_full_color.svg" alt="" />
+                    <img class="h-8 w-auto" src="./assets/img/logos/danfit_blue_logo_full_color.svg" alt="" />
                 </NuxtLink>
             </div>
             <div class="py-8">
                 <div class="text-center">
-                    <p class="font-bold text-indigo-600 text-8xl">404</p>
+                    <p class="font-bold text-indigo-600 text-2xl">404</p>
                     <h1 class="mt-2 font-bold tracking-tight text-gray-900 sm:text-5xl">Nie znaleziono strony.
                     </h1>
                     <p class="mt-2 text-gray-500">Ups! Nie udało nam znaleźć się strony na, którą próbujesz
