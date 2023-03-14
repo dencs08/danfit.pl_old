@@ -117,14 +117,8 @@
         <Footer />
     </main>
 </template>
-<script lang="ts">
-export default {
-    data() {
-        return {
-            name: 'danfit'
-        }
-    }
-}
+<script setup lang="ts">
+const name = 'danfit'
 </script>
 <style lang="">
     
