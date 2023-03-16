@@ -65,6 +65,9 @@
         </div>
     </section>
 </template>
-<script lang="ts">
+<script setup lang="ts">
+definePageMeta({
+    name: 'Login',
+})
 </script>
 <style lang="scss"></style>

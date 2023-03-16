@@ -60,6 +60,9 @@
         </div>
     </section>
 </template>
-<script lang="ts">
+<script setup lang="ts">
+definePageMeta({
+    name: 'Register'
+})
 </script>
 <style lang="scss"></style>

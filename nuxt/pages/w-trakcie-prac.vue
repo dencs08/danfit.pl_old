@@ -8,8 +8,10 @@
         <LinkCustom link="Start" :underline="true">Powrót na strone główną</LinkCustom>
     </div>
 </template>
-<script lang="ts">
-
+<script setup lang="ts">
+definePageMeta({
+    name: 'PageInProgress'
+})
 </script>
 <style lang="">
     

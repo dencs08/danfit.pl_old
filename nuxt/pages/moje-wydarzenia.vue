@@ -9,23 +9,15 @@
         </div>
     </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 definePageMeta({
+    name: 'MyEvents',
     layout: 'account'
 })
 
-export default {
-    data() {
-        return {
-            items: ["😏", "😐", "😑", "😒", "😕",],
-        }
-    },
-
-    methods: {
-        removeItem(toRemove: string) {
-            this.items = this.items.filter((item: string) => item !== toRemove)
-        }
-    }
+let items = ["😏", "😐", "😑", "😒", "😕",];
+function removeItem(toRemove: string) {
+    items = items.filter((item: string) => item !== toRemove)
 }
 </script>
 <style lang="">

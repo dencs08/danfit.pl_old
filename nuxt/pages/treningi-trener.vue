@@ -6,10 +6,10 @@
             miejsca w, których prowadzisz treningi.</p>
     </div>
 </template>
-<script lang="ts">
-export default {
-
-}
+<script setup lang="ts">
+definePageMeta({
+    name: 'CoachTrainings',
+})
 </script>
 <style lang="">
     

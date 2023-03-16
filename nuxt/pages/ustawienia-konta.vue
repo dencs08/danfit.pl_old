@@ -49,28 +49,28 @@
                 </div>
                 <ul role="list" class="mt-2 divide-y divide-gray-200">
 
-                    <SwitchGroup as="li" class="flex items-center justify-between py-4">
+                    <HeadlessSwitchGroup as="li" class="flex items-center justify-between py-4">
                         <div class="flex flex-col">
-                            <SwitchLabel as="p" class="text-sm font-medium text-gray-900" passive>
-                                Wyświetlaj moje nazwisko publicznie</SwitchLabel>
-                            <SwitchDescription class="text-sm text-gray-500">Zaznacz,
+                            <HeadlessSwitchLabel as="p" class="text-sm font-medium text-gray-900" passive>
+                                Wyświetlaj moje nazwisko publicznie</HeadlessSwitchLabel>
+                            <HeadlessSwitchDescription class="text-sm text-gray-500">Zaznacz,
                                 aby Twoje nazwisko było wyświetlane przy
                                 <strong>publicznych</strong> wydarzeniach na, które się
                                 zapisaleś.
-                            </SwitchDescription>
+                            </HeadlessSwitchDescription>
                         </div>
-                        <SwitchCustom :state="user.privateSurName" :icons="false" />
-                    </SwitchGroup>
+                        <HeadlessSwitchCustom :state="user.privateSurName" :icons="false" />
+                    </HeadlessSwitchGroup>
 
-                    <SwitchGroup as="li" class="flex items-center justify-between py-4">
+                    <HeadlessSwitchGroup as="li" class="flex items-center justify-between py-4">
                         <div class="flex flex-col">
-                            <SwitchLabel as="p" class="text-sm font-medium text-gray-900" passive>
-                                Ustaw konto jako prywatne</SwitchLabel>
-                            <SwitchDescription class="text-sm text-gray-500">Zaznacz, aby Twoje
-                                konto było ukryte dla wszystkich.</SwitchDescription>
+                            <HeadlessSwitchLabel as="p" class="text-sm font-medium text-gray-900" passive>
+                                Ustaw konto jako prywatne</HeadlessSwitchLabel>
+                            <HeadlessSwitchDescription class="text-sm text-gray-500">Zaznacz, aby Twoje
+                                konto było ukryte dla wszystkich.</HeadlessSwitchDescription>
                         </div>
-                        <SwitchCustom :state="user.privateAccount" :icons="false" />
-                    </SwitchGroup>
+                        <HeadlessSwitchCustom :state="user.privateAccount" :icons="false" />
+                    </HeadlessSwitchGroup>
                 </ul>
             </div>
             <div class="mt-4 flex justify-end py-4 space-x-3">
@@ -80,41 +80,20 @@
         </div>
     </form>
 </template>
-<script lang="ts">
-import {
-    Switch,
-    SwitchDescription,
-    SwitchGroup,
-    SwitchLabel,
-} from '@headlessui/vue'
-
+<script setup lang="ts">
 definePageMeta({
+    name: 'AccountSettings',
     layout: 'account'
 })
 
-export default {
-
-
-    components: {
-        Switch,
-        SwitchDescription,
-        SwitchGroup,
-        SwitchLabel,
-    },
-
-    data() {
-        return {
-            user: {
-                name: 'Debbie Lewis',
-                handle: 'deblewis',
-                email: 'debbielewis@example.com',
-                imageUrl:
-                    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
-                privateSurName: true,
-                privateAccount: false,
-            },
-        }
-    }
+const user = {
+    name: 'Debbie Lewis',
+    handle: 'deblewis',
+    email: 'debbielewis@example.com',
+    imageUrl:
+        'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80',
+    privateSurName: true,
+    privateAccount: false,
 }
 </script>
 <style lang="">

@@ -25,6 +25,10 @@
     </main>
 </template>
 <script setup lang="ts">
+definePageMeta({
+    name: 'Terms'
+})
+
 const name = 'danfit';
 const terms =
     [

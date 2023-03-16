@@ -30,34 +30,35 @@
                         </div>
                     </dl>
                 </div>
-                <Menu as="div" class="absolute top-6 right-0 xl:relative xl:top-auto xl:right-auto xl:self-center">
+                <HeadlessMenu as="div" class="absolute top-6 right-0 xl:relative xl:top-auto xl:right-auto xl:self-center">
                     <div>
-                        <MenuButton class="-m-2 flex items-center rounded-full p-2 text-gray-500 hover:text-gray-600">
+                        <HeadlessMenuButton
+                            class="-m-2 flex items-center rounded-full p-2 text-gray-500 hover:text-gray-600">
                             <span class="sr-only">Open options</span>
                             <EllipsisHorizontalIcon class="h-5 w-5" aria-hidden="true" />
-                        </MenuButton>
+                        </HeadlessMenuButton>
                     </div>
 
                     <transition enter-active-class="transition ease-out duration-100"
                         enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
                         leave-active-class="transition ease-in duration-75"
                         leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                        <MenuItems
+                        <HeadlessMenuItems
                             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <div class="py-1">
-                                <MenuItem v-slot="{ active }">
-                                <a href="#"
-                                    :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Poproś
-                                    o zmianę</a>
-                                </MenuItem>
-                                <MenuItem v-slot="{ active }">
-                                <a href="#"
-                                    :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Odrezerwuj</a>
-                                </MenuItem>
+                                <HeadlessMenuItem v-slot="{ active }">
+                                    <a href="#"
+                                        :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Poproś
+                                        o zmianę</a>
+                                </HeadlessMenuItem>
+                                <HeadlessMenuItem v-slot="{ active }">
+                                    <a href="#"
+                                        :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Odrezerwuj</a>
+                                </HeadlessMenuItem>
                             </div>
-                        </MenuItems>
+                        </HeadlessMenuItems>
                     </transition>
-                </Menu>
+                </HeadlessMenu>
             </li>
         </ol>
 
@@ -95,7 +96,7 @@
         </nav>
     </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
 import {
     CalendarIcon,
     ChevronLeftIcon,
@@ -103,57 +104,39 @@ import {
     EllipsisHorizontalIcon,
     MapPinIcon,
 } from '@heroicons/vue/20/solid'
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 
 definePageMeta({
+    name: 'MyTrainings',
     layout: 'account'
 })
 
-export default {
-    components: {
-        CalendarIcon,
-        ChevronLeftIcon,
-        ChevronRightIcon,
-        EllipsisHorizontalIcon,
-        MapPinIcon,
-        Menu, MenuButton, MenuItem, MenuItems
+const meetings = [
+    {
+        id: 1,
+        date: '10 styczeń 2022',
+        time: '16:00',
+        datetime: '2022-01-10T17:00',
+        name: 'Jan Kowal',
+        location: 'CRS Zielona Góra',
     },
-    data() {
-        return {
-            meetings: [
-                {
-                    id: 1,
-                    date: '10 styczeń 2022',
-                    time: '16:00',
-                    datetime: '2022-01-10T17:00',
-                    name: 'Jan Kowal',
-                    location: 'CRS Zielona Góra',
-                },
-                {
-                    id: 2,
-                    date: '10 styczeń 2022',
-                    time: '16:00',
-                    datetime: '2022-01-10T17:00',
-                    name: 'Jan Kowal',
-                    location: 'CRS Zielona Góra',
-                },
-                {
-                    id: 3,
-                    date: '10 styczeń 2022',
-                    time: '16:00',
-                    datetime: '2022-01-10T17:00',
-                    name: 'Jan Kowal',
-                    location: 'CRS Zielona Góra',
-                },
-                // More meetings...
-            ]
-        }
+    {
+        id: 2,
+        date: '10 styczeń 2022',
+        time: '16:00',
+        datetime: '2022-01-10T17:00',
+        name: 'Jan Kowal',
+        location: 'CRS Zielona Góra',
     },
-
-    methods: {
-
-    }
-}
+    {
+        id: 3,
+        date: '10 styczeń 2022',
+        time: '16:00',
+        datetime: '2022-01-10T17:00',
+        name: 'Jan Kowal',
+        location: 'CRS Zielona Góra',
+    },
+    // More meetings...
+]
 </script>
 <style lang="">
     

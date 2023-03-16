@@ -6,10 +6,10 @@
     </main>
 </template>
 
-<script lang="ts">
-export default {
-
-}
+<script setup lang="ts">
+definePageMeta({
+    name: 'Contact',
+})
 </script>
 
 <style lang="">

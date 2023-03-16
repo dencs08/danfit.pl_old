@@ -118,6 +118,9 @@
     </main>
 </template>
 <script setup lang="ts">
+definePageMeta({
+    name: 'Privacy'
+})
 const name = 'danfit'
 </script>
 <style lang="">

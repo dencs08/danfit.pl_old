@@ -1,13 +1,11 @@
 <template>
     <div>
-        test
+        <h1>Zielona góra</h1>
     </div>
 </template>
 <script setup lang="ts">
 definePageMeta({
-    layout: 'account'
+    name: 'ZielonaGora'
 })
 </script>
-<style lang="">
-    
-</style>
+<style lang="scss"></style>

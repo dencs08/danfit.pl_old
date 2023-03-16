@@ -33,7 +33,10 @@
         <Footer />
     </div>
 </template>
-<script lang="ts">
+<script setup lang="ts">
+definePageMeta({
+    name: 'Offer'
+})
 </script>
 <style lang="">
     

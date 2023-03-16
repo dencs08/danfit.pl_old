@@ -8,6 +8,9 @@
         <Footer />
     </main>
 </template>
-<script lang="ts">
+<script setup lang="ts">
+definePageMeta({
+    name: 'Start',
+})
 </script>
 <style lang="scss"></style>
