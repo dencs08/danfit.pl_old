@@ -9,6 +9,8 @@
     </main>
 </template>
 <script lang="ts" setup>
-
+definePageMeta({
+    name: 'Start',
+})
 </script>
 <style lang="scss"></style>
