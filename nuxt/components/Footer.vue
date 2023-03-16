@@ -2,7 +2,7 @@
     <footer class="pt-14 pb-8 bg-gray-900">
         <div class="container md:flex md:justify-between md:space-x-10">
             <div class="mb-24 md:mb-0">
-                <NuxtLink to="/start" class="flex items-center">
+                <NuxtLink :to="{ name: 'Start' }" class="flex items-center">
                     <img src="../assets/img/danfit_logo_white.svg" class="mr-3 h-8" alt="danfit Logo" />
                 </NuxtLink>
 
@@ -33,7 +33,7 @@
                     <h2 class="mb-6 text-sm font-semibold uppercase text-white">Kontakt</h2>
                     <ul class="text-gray-400 space-y-4">
                         <li v-for="el in contact">
-                            <span>{{ el.name }}</span>
+                            <a :href="el.to">{{ el.name }}</a>
                         </li>
                     </ul>
                 </div>
@@ -50,7 +50,7 @@
         <hr class="container my-6  sm:mx-auto border-gray-700 lg:my-8" />
         <div class="container flex flex-col sm:flex-row items-center sm:justify-between">
             <span class="text-sm  sm:text-center text-gray-400">© 2022
-                <NuxtLink to="/start" class="hover:underline">
+                <NuxtLink :to="{ name: 'Start' }" class="hover:underline">
                     danfit.
                 </NuxtLink> Wszelkie prawa zastrzeżone.
             </span>
@@ -68,54 +68,36 @@
         </div>
     </footer>
 </template>
-<script lang="ts">
-import { axiosClient } from '../ts/axios';
-import { toast } from '../ts/toast';
+<script setup lang="ts">
+const menu = [
+    { name: 'Start', to: 'Start' },
+    { name: 'Oferta', to: 'Offer' },
+    { name: 'O nas', to: 'AboutUs' },
+    { name: 'Kontakt', to: 'Contact' },
+    { name: 'Zarezerwuj trening', to: 'Calendar' },
+]
 
-export default {
-    data() {
-        return {
-            menu: [
-                { name: 'Start', to: 'Start' },
-                { name: 'Oferta', to: 'Offer' },
-                { name: 'O nas', to: 'AboutUs' },
-                { name: 'Kontakt', to: 'Contact' },
-                { name: 'Zarezerwuj trening', to: 'Calendar' },
-            ],
-            contact: [
-                { name: 'biuro@danfit.pl', to: '#' },
-                { name: '882 031 130', to: '#' },
-            ],
-            privacy: [
-                { name: 'Polityka prywatności', to: 'Privacy' },
-                { name: 'Warunki korzystania', to: 'Terms' },
-            ],
+const contact = [
+    { name: 'biuro@danfit.pl', to: 'mailto:biuro@danfit.pl' },
+    { name: '882 031 130', to: 'tel:+48882031130' },
+]
 
-            newsletterEmail: ''
-        }
-    },
+const privacy = [
+    { name: 'Polityka prywatności', to: 'Privacy' },
+    { name: 'Warunki korzystania', to: 'Terms' },
+]
 
-    methods: {
-        async subscribeToNewsletter(event: any) {
-            event.preventDefault();
-            axiosClient.post('/newsletter', {
-                email: this.newsletterEmail
-            })
-                .then(response => {
-                    console.log(response);
-                    toast('Dodaliśmy Cię do newslettera', 'Dziękujemy!', '')
-                    event.target.reset();
-                })
-                .catch(error => {
-                    console.error(error);
-                    toast('Ups! Coś poszło nie tak..', 'Spróbuj ponownie poźniej, lub skontaktuj się bezpośrednio na biuro@danfit.pl', 'warning')
-                });
-
-            // let test = axiosClient.get('/test')
-            // console.log(test);
-
-        }
+let newsletterEmail = ''
+async function subscribeToNewsletter() {
+    try {
+        let response = await usePostNewsletter('/newsletter', newsletterEmail)
+        let data = response.data;
+        toast('Dodaliśmy Cię do newslettera', 'Dziękujemy!', '')
+        // console.log(data);
+    } catch (error) {
+        toast('Ups! Coś poszło nie tak..', 'Spróbuj ponownie poźniej, lub skontaktuj się bezpośrednio na biuro@danfit.pl', 'warning')
     }
 }
 </script>
+
 <style lang="scss"></style>
