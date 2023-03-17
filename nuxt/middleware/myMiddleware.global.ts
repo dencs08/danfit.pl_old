@@ -1,10 +1,11 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-    // console.log(to);
-    // console.log(from);
+    // console.log(from.name + " > " + to.name);
+    if (to.name === "Start") {
+        // return navigateTo("/");
+    }
 
-    const myArray: string[] = ["/Login", "/Calendar", "/Register"];
-
-    if (myArray.includes(to.fullPath)) {
-        return navigateTo("/PageInProgress");
+    const pathNames: string[] = ["Login", "Calendar", "Register", "konto"];
+    if (pathNames.includes(to.name as string)) {
+        return navigateTo({ name: "PageInProgress" });
     }
 });
