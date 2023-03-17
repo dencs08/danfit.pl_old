@@ -6,7 +6,7 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-3">
                     <div
-                        class="relative overflow-hidden bg-gradient-to-b from-secondaryColor to-emerald-500 py-10 px-6 sm:px-10 xl:p-12 text-primaryWhite">
+                        class="relative overflow-hidden bg-gradient-to-b from-color-secondary to-emerald-500 py-10 px-6 sm:px-10 xl:p-12 text-white-primary">
 
                         <h3 class="text-lg font-medium">Informacje kontaktowe</h3>
                         <p class="mt-6">
@@ -17,14 +17,15 @@
                         </p>
                         <dl class="mt-8 space-y-6">
                             <dt><span class="sr-only">Phone number</span></dt>
-                            <dd class="flex">
-                                <Icon name="ic:round-phone-enabled" width="25px" />
-                                <span class="ml-3">+48 882 031 130</span>
+                            <dd class="flex items-center">
+                                <Icon name="ic:round-phone-enabled" class="w-4 h-4" />
+                                <a href="tel:+48882031130"><span class="ml-3 underline">+48 882 031 130</span></a>
                             </dd>
                             <dt><span class="sr-only">Email</span></dt>
-                            <dd class="flex">
-                                <Icon name="ic:baseline-mail" width="25px" />
-                                <span class="ml-3">biuro@danfit.pl</span>
+                            <dd class="flex items-center">
+                                <Icon name="ic:baseline-mail" class="w-4 h-4" />
+                                <a href="mailto:biuro@danfit.pl&subject=Zapytanie do danfit.pl&body=. . ."><span
+                                        class="ml-3 underline">biuro@danfit.pl</span></a>
                             </dd>
                         </dl>
                         <ul role="list" class="mt-8 flex space-x-12">
@@ -32,7 +33,7 @@
                                 <a class="text-teal-200 hover:text-teal-100" href="https://www.facebook.com/danfitpl"
                                     target="_blank">
                                     <span class="sr-only">Facebook</span>
-                                    <Icon name="ic:baseline-facebook" width="25px" />
+                                    <Icon name="ic:baseline-facebook" class="w-8 h-8" />
                                 </a>
                             </li>
                         </ul>
@@ -40,7 +41,7 @@
 
                     <!-- Contact form -->
                     <div class="py-10 px-6 sm:px-10 lg:col-span-2 xl:p-12">
-                        <h3 class="text-lg font-medium text-warm-gray-900">Napisz do nas</h3>
+                        <h3 class="text-lg font-medium text-gray-900">Napisz do nas</h3>
                         <form ref="contactForm" @submit.prevent="submitForm" action="#" method="POST"
                             class="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
 
@@ -68,51 +69,35 @@
         </div>
     </section>
 </template>
-<script lang="ts">
-import { axiosClient } from '../ts/axios'
-import { toast } from '../ts/toast';
-export default {
-    data() {
-        return {
-            email: {
-                name: '',
-                surname: '',
-                email: '',
-                phone: '',
-                subject: '',
-                message: '',
-            }
-        }
-    },
+<script setup lang="ts">
+let email = {
+    name: '',
+    surname: '',
+    email: '',
+    phone: '',
+    subject: '',
+    message: '',
+}
 
-    methods: {
-        async submitForm(event: any) {
-            event.preventDefault();
-            const email = { name: this.email.name, surname: this.email.surname, email: this.email.email, phone: this.email.phone, subject: this.email.subject, message: this.email.message };
-            console.log(email);
-            // await sendEmail(email);
+async function submitForm(event: any) {
+    event.preventDefault();
+    console.log(email);
 
-            axiosClient.post('/emailContactForm', {
-                name: email.name,
-                surname: email.surname,
-                email: email.email,
-                phone: email.phone,
-                subject: email.subject,
-                message: email.message,
-            })
-                .then(response => {
-                    console.log("good");
-                    console.log(response);
-                    toast('Wiadomośc wysłana!', 'Sprawdź swoją skrzynkę po email z potwierdzeniem, do usłyszenia wkrótce! :-)', '')
-                    event.target.reset();
-                })
-                .catch(error => {
-                    console.log("error");
-                    console.error(error);
-                    toast('Ups! Coś poszło nie tak..', 'Spróbuj ponownie poźniej, lub skontaktuj się bezpośrednio na biuro@danfit.pl', 'warning')
-                });
-        }
-    },
+    try {
+        let response = await useEmailContactForm('/emailContactForm', {
+            name: email.name,
+            surname: email.surname,
+            email: email.email,
+            phone: email.phone,
+            subject: email.subject,
+            message: email.message,
+        })
+        toast('Wiadomośc wysłana!', 'Sprawdź swoją skrzynkę po email z potwierdzeniem, do usłyszenia wkrótce! :-)', '')
+        // console.log(response);
+    } catch (error) {
+        toast('Ups! Coś poszło nie tak..', 'Spróbuj ponownie poźniej, lub skontaktuj się bezpośrednio na biuro@danfit.pl', 'warning')
+        // console.log(error);
+    }
 }
 </script>
 <style lang="">
