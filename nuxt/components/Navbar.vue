@@ -1,25 +1,25 @@
 <template>
-    <Popover class="fixed z-[999] bg-white-primary shadow-md">
+    <HeadlessPopover class="fixed z-[999] bg-white-primary shadow-md">
         <div class="relative mx-auto max-w-[95%] sm:max-w-[98%] w-screen">
             <div
                 class="flex items-center justify-between min-h-[55px] lg:h-[8.5vh] max-h-[80px] lg:justify-start lg:space-x-10">
                 <div class="flex justify-start lg:w-0 lg:flex-1">
-                    <NuxtLink to="/start" class="mr-10">
+                    <NuxtLink :to="{ name: 'Start' }" class="mr-10">
                         <img :src="logo" class="min-w-[30px] lg:w-[1.75vw] max-w-[40px]" alt="danfit logo">
                     </NuxtLink>
                 </div>
                 <div class="-my-2 -mr-2 lg:hidden">
-                    <PopoverButton
+                    <HeadlessPopoverButton
                         class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500">
                         <span class="sr-only">Open menu</span>
                         <Icon name="radix-icons:hamburger-menu" />
-                    </PopoverButton>
+                    </HeadlessPopoverButton>
                 </div>
-                <PopoverGroup as="nav" class="hidden space-x-10 lg:flex">
+                <HeadlessPopoverGroup as="nav" class="hidden space-x-10 lg:flex">
                     <NuxtLink v-for="link in mainMenu" :to="{ name: link.to }" :underline="false" :black="true">{{
                         link.name
                     }}</NuxtLink>
-                </PopoverGroup>
+                </HeadlessPopoverGroup>
                 <div class="hidden items-center justify-end lg:flex lg:flex-1 lg:w-0 space-x-4">
                     <NuxtLink :to="{ name: 'Login' }"
                         class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Zaloguj
@@ -35,29 +35,30 @@
         <transition enter-active-class="duration-200 ease-out" enter-from-class="opacity-0 scale-95"
             enter-to-class="opacity-100 scale-100" leave-active-class="duration-100 ease-in"
             leave-from-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-95">
-            <PopoverPanel focus class="absolute inset-x-0 top-0 origin-top-right transform p-2 transition lg:hidden">
+            <HeadlessPopoverPanel focus
+                class="absolute inset-x-0 top-0 origin-top-right transform p-2 transition lg:hidden">
                 <div class="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                     <div class="px-5 pt-5 pb-6">
                         <div class="flex items-center justify-between">
                             <div>
-                                <NuxtLink to="/start">
+                                <NuxtLink :to="{ name: 'Start' }">
                                     <img :src="logo" class="min-w-[25px]" alt="danfit logo">
                                 </NuxtLink>
                             </div>
                             <div class="-mr-2">
-                                <PopoverButton
+                                <HeadlessPopoverButton
                                     class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                                     <span class="sr-only">Close menu</span>
                                     <Icon name="mingcute:close-line" width="20px" class="inline" />
-                                </PopoverButton>
+                                </HeadlessPopoverButton>
                             </div>
                         </div>
                         <div class="mt-6">
                             <nav class="grid gap-y-6">
-                                <Link v-for="link in mainMenu" :to="{ name: link.to }" :underline="false" :black="true">
-                                <Icon :name="link.icon" width="20px" class="inline" />
-                                <span class="ml-3 text-base font-medium text-gray-900">{{ link.name }}</span>
-                                </Link>
+                                <NuxtLink v-for="link in mainMenu" :to="{ name: link.to }" :underline="false" :black="true">
+                                    <Icon :name="link.icon" width="20px" class="inline" />
+                                    <span class="ml-3 text-base font-medium text-gray-900">{{ link.name }}</span>
+                                </NuxtLink>
                             </nav>
                         </div>
                     </div>
@@ -82,20 +83,17 @@
                         </div>
                     </div>
                 </div>
-            </PopoverPanel>
+            </HeadlessPopoverPanel>
         </transition>
-    </Popover>
+    </HeadlessPopover>
 </template>
 
 <script lang="ts">
 import logo from '../assets/img/logos/danfit_logotype_black.svg';
 
-import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
 
 export default defineComponent({
-    components: {
-        Popover, PopoverButton, PopoverGroup, PopoverPanel
-    },
+
     data() {
         return {
             logo: logo,
