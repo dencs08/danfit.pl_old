@@ -3,7 +3,7 @@
         <div class="container flex flex-col lg:flex-row text-white-primary">
             <div class="sm:pr-16 mx-auto mb-10 flex-1 md:min-w-[33vw]">
                 <h5 class="mb-6 font-extrabold">
-                    Treningi squasha dla wszystkich, w każdym wieku!
+                    Treningi squasha dla <TextGradient>wszystkich</TextGradient>, w każdym wieku!
                 </h5>
                 <p class="text-gray-400">
                     Nie ważne, czy masz doświadczenie ze squashem lub innymi sportami rakietowymi, my prowadzimy zajęcia
@@ -19,7 +19,7 @@
                 <NuxtLink :to="{ name: 'Offer' }" v-for="feature in features">
                     <div class="card rounded-xl py-5 px-0 sm:p-7 hover:bg-gray-800 transition-all duration-75">
                         <div class="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-indigo-50">
-                            <Icon :name="feature.icon" width="35px" class="text-black-primary" />
+                            <Icon :name="feature.icon" class="text-black-primary h-8 w-8" />
                         </div>
                         <h6 class="mb-2 font-semibold leading-5 text-gray-200">{{ feature.title }}</h6>
                         <p class="text-gray-400">
