@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink :to="link">
+    <NuxtLink :to="{ name: link }">
         <span class="" :class="{ underline: underline, 'text-black-primary': black, 'text-color-secondary': !black }">
             <slot></slot>
         </span>
