@@ -24,8 +24,8 @@ export default {
     data() {
         return {
             cities: [
-                { name: 'Legnica', initials: 'LG', to: 'Contact', coaches: 2, bgColor: 'bg-emerald-500' },
-                { name: 'Zielona Góra', initials: 'ZG', to: 'Contact', coaches: 2, bgColor: 'bg-blue-500' },
+                { name: 'Legnica', initials: 'LG', to: 'Legnica', coaches: 2, bgColor: 'bg-emerald-500' },
+                { name: 'Zielona Góra', initials: 'ZG', to: 'ZielonaGora', coaches: 2, bgColor: 'bg-blue-500' },
             ]
         }
     }
